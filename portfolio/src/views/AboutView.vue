@@ -33,7 +33,7 @@ onMounted(() => {
           <div class="w-10 h-0.5 bg-slate-300"></div>
         </div>
         <div class="md:col-span-2">
-          <div class="font-serif text-2xl text-slate-800 leading-relaxed" v-html="sanitizedBio" />
+          <div class="rich-text font-serif text-2xl text-slate-800 leading-relaxed" v-html="sanitizedBio" />
         </div>
       </section>
       <section class="grid md:grid-cols-3 gap-12 md:gap-16" aria-labelledby="details-heading">

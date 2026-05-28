@@ -2,6 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
+import RichTextEditor from '@/components/RichTextEditor.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -121,13 +122,7 @@ async function handleSubmit() {
         >
           Descripción
         </label>
-        <textarea
-          id="description"
-          v-model="form.description"
-          rows="4"
-          required
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors resize-none"
-        />
+        <RichTextEditor v-model="form.description" />
       </div>
 
       <div class="flex flex-col gap-2">

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useAboutStore } from '@/stores/about'
+import RichTextEditor from '@/components/RichTextEditor.vue'
 
 const store = useAboutStore()
 const successMessage = ref(null)
@@ -72,13 +73,7 @@ async function handleSubmit() {
         >
           Biografía
         </label>
-        <textarea
-          id="bio"
-          v-model="form.bio"
-          rows="6"
-          required
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors resize-none"
-        />
+        <RichTextEditor v-model="form.bio" />
       </div>
 
       <div class="flex flex-col gap-4">

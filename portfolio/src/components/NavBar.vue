@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
+const auth = useAuthStore()
 const menuOpen = ref(false)
 
 const toggleMenu = () => {
@@ -43,7 +45,7 @@ const links = [
 
       <ul
         id="nav-menu"
-        class="hidden md:flex gap-8 list-none"
+        class="hidden md:flex gap-8 items-center list-none"
         :class="{
           'flex flex-col absolute top-full left-0 w-full bg-stone-50 border-b border-stone-200 px-6 py-4 gap-4':
             menuOpen,
@@ -56,6 +58,14 @@ const links = [
             :class="{ 'text-slate-800 font-semibold': route.name === link.name }"
           >
             {{ link.label }}
+          </RouterLink>
+        </li>
+        <li v-if="auth.isAuthenticated">
+          <RouterLink
+            :to="{ name: 'admin' }"
+            class="font-sans text-xs tracking-widest uppercase text-slate-400 border border-stone-300 px-3 py-1.5 rounded hover:text-slate-700 hover:border-slate-400 transition-colors"
+          >
+            Admin
           </RouterLink>
         </li>
       </ul>
@@ -73,6 +83,15 @@ const links = [
           @click="menuOpen = false"
         >
           {{ link.label }}
+        </RouterLink>
+      </li>
+      <li v-if="auth.isAuthenticated">
+        <RouterLink
+          :to="{ name: 'admin' }"
+          class="font-sans text-xs tracking-widest uppercase text-slate-400 hover:text-slate-700 transition-colors"
+          @click="menuOpen = false"
+        >
+          Admin
         </RouterLink>
       </li>
     </ul>

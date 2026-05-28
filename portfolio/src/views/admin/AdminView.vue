@@ -36,7 +36,13 @@ async function handleLogout() {
         </RouterLink>
       </nav>
 
-      <div class="px-4 py-6 border-t border-slate-700">
+      <div class="px-4 py-6 border-t border-slate-700 flex flex-col gap-2">
+        <RouterLink
+          :to="{ name: 'home' }"
+          class="w-full font-sans text-xs tracking-widest uppercase text-slate-400 hover:text-white px-4 py-3 rounded hover:bg-slate-700 transition-colors"
+        >
+          Ver portfolio
+        </RouterLink>
         <button
           @click="handleLogout"
           class="w-full font-sans text-xs tracking-widest uppercase text-slate-400 hover:text-white px-4 py-3 rounded hover:bg-slate-700 transition-colors text-left"

@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
 import AppSpinner from '@/components/AppSpinner.vue'
+import DOMPurify from 'dompurify'
 
 const route = useRoute()
 const router = useRouter()
@@ -17,6 +18,10 @@ onMounted(async () => {
 
 const imageUrl = (image) =>
   image ? `${import.meta.env.VITE_STORAGE_URL}/${image}` : null
+
+const sanitizedDescription = computed(() =>
+  store.project ? DOMPurify.sanitize(store.project.description) : '',
+)
 </script>
 
 <template>
@@ -74,9 +79,10 @@ const imageUrl = (image) =>
           <div class="w-10 h-0.5 bg-slate-300"></div>
         </div>
         <div class="md:col-span-2">
-          <p class="font-sans text-base text-slate-600 leading-relaxed mb-8">
-            {{ store.project.description }}
-          </p>
+          <div
+            class="rich-text font-sans text-base text-slate-600 leading-relaxed mb-8"
+            v-html="sanitizedDescription"
+          />
           <a
             v-if="store.project.url"
             :href="store.project.url"

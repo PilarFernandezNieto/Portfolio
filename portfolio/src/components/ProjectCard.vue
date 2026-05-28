@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import DOMPurify from 'dompurify'
 
 const props = defineProps({
   project: {
@@ -11,6 +12,8 @@ const props = defineProps({
 const imageUrl = computed(() =>
   props.project.image ? `${import.meta.env.VITE_STORAGE_URL}/${props.project.image}` : null,
 )
+
+const plainDescription = computed(() => DOMPurify.sanitize(props.project.description))
 </script>
 
 <template>
@@ -31,9 +34,7 @@ const imageUrl = computed(() =>
       <h2 class="font-serif text-xl text-slate-800 mb-2">
         {{ project.title }}
       </h2>
-      <p class="font-sans text-sm text-slate-500 leading-relaxed mb-4">
-        {{ project.description }}
-      </p>
+      <div class="rich-text font-sans text-sm text-slate-500 leading-relaxed mb-4" v-html="plainDescription"></div>
 
       <ul class="flex flex-wrap gap-2 mb-6" aria-label="Tecnologías utilizadas">
         <li
