@@ -1,9 +1,13 @@
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const auth = useAuthStore()
+
+onMounted(() => { document.body.style.overflow = 'hidden' })
+onUnmounted(() => { document.body.style.overflow = '' })
 
 async function handleLogout() {
   await auth.logout()

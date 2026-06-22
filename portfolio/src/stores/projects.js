@@ -41,7 +41,7 @@ export const useProjectsStore = defineStore('projects', () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       projects.value.push(data.data)
-      return data.message
+      return data.data
     } catch (e) {
       error.value = e.response?.data?.message || 'Error al crear el proyecto'
       throw e
@@ -56,7 +56,8 @@ export const useProjectsStore = defineStore('projects', () => {
       })
       const index = projects.value.findIndex((p) => p.id === id)
       if (index !== -1) projects.value[index] = data.data
-      return data.message
+      project.value = data.data
+      return data.data
     } catch (e) {
       error.value = e.response?.data?.message || 'Error al actualizar el proyecto'
       throw e
@@ -75,6 +76,47 @@ export const useProjectsStore = defineStore('projects', () => {
     }
   }
 
+  async function addProjectImages(projectId, files) {
+    error.value = null
+    const formData = new FormData()
+    files.forEach((file) => formData.append('images[]', file))
+    try {
+      const { data } = await api.post(`/projects/${projectId}/images`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      if (project.value?.id === Number(projectId)) {
+        project.value.images = [...(project.value.images || []), ...data.data]
+      }
+      return data.data
+    } catch (e) {
+      error.value = e.response?.data?.message || 'Error al subir las imágenes'
+      throw e
+    }
+  }
+
+  async function deleteProjectImage(projectId, imageId) {
+    error.value = null
+    try {
+      await api.delete(`/projects/${projectId}/images/${imageId}`)
+      if (project.value?.id === Number(projectId)) {
+        project.value.images = project.value.images.filter((img) => img.id !== imageId)
+      }
+    } catch (e) {
+      error.value = e.response?.data?.message || 'Error al eliminar la imagen'
+      throw e
+    }
+  }
+
+  async function reorderProjectImages(projectId, images) {
+    error.value = null
+    try {
+      await api.put(`/projects/${projectId}/images/reorder`, { images })
+    } catch (e) {
+      error.value = e.response?.data?.message || 'Error al reordenar las imágenes'
+      throw e
+    }
+  }
+
   return {
     projects,
     project,
@@ -85,5 +127,8 @@ export const useProjectsStore = defineStore('projects', () => {
     createProject,
     updateProject,
     deleteProject,
+    addProjectImages,
+    deleteProjectImage,
+    reorderProjectImages,
   }
 })

@@ -16,12 +16,13 @@ onMounted(async () => {
   }
 })
 
-const imageUrl = (image) =>
-  image ? `${import.meta.env.VITE_STORAGE_URL}/${image}` : null
+const storageUrl = (path) => `${import.meta.env.VITE_STORAGE_URL}/${path}`
 
 const sanitizedDescription = computed(() =>
   store.project ? DOMPurify.sanitize(store.project.description) : '',
 )
+
+const hasGallery = computed(() => store.project?.images?.length > 0)
 </script>
 
 <template>
@@ -60,12 +61,30 @@ const sanitizedDescription = computed(() =>
         </ul>
       </header>
 
+      <!-- Galería de capturas -->
+      <div v-if="hasGallery" class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div
+            v-for="img in store.project.images"
+            :key="img.id"
+            class="rounded-lg overflow-hidden border border-stone-200"
+          >
+            <img
+              :src="storageUrl(img.path)"
+              :alt="`Captura de ${store.project.title}`"
+              class="w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagen portada como fallback si no hay galería -->
       <div
-        v-if="imageUrl(store.project.image)"
+        v-else-if="store.project.image"
         class="w-full rounded-lg overflow-hidden border border-stone-200 mb-12"
       >
         <img
-          :src="imageUrl(store.project.image)"
+          :src="storageUrl(store.project.image)"
           :alt="`Captura de ${store.project.title}`"
           class="w-full object-cover"
         />

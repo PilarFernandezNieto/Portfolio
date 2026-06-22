@@ -10,6 +10,8 @@ const store = useProjectsStore()
 
 const isEditing = computed(() => !!route.params.id)
 const imagePreview = ref(null)
+const uploadingImages = ref(false)
+const gallery = ref([])
 
 const form = ref({
   title: '',
@@ -37,6 +39,7 @@ onMounted(async () => {
     if (p.image) {
       imagePreview.value = `${import.meta.env.VITE_STORAGE_URL}/${p.image}`
     }
+    gallery.value = [...(p.images ?? [])]
   }
 })
 
@@ -45,6 +48,49 @@ function handleImageChange(e) {
   if (!file) return
   form.value.image = file
   imagePreview.value = URL.createObjectURL(file)
+}
+
+async function handleGalleryUpload(e) {
+  const files = Array.from(e.target.files)
+  if (!files.length) return
+  e.target.value = ''
+  uploadingImages.value = true
+  try {
+    const newImages = await store.addProjectImages(route.params.id, files)
+    gallery.value = [...gallery.value, ...newImages]
+  } finally {
+    uploadingImages.value = false
+  }
+}
+
+async function handleDeleteImage(imageId) {
+  await store.deleteProjectImage(route.params.id, imageId)
+  gallery.value = gallery.value.filter((img) => img.id !== imageId)
+}
+
+const dragIndex = ref(null)
+
+function onDragStart(index) {
+  dragIndex.value = index
+}
+
+function onDragOver(index) {
+  if (dragIndex.value === null || dragIndex.value === index) return
+  const arr = [...gallery.value]
+  const [moved] = arr.splice(dragIndex.value, 1)
+  arr.splice(index, 0, moved)
+  gallery.value = arr
+  dragIndex.value = index
+}
+
+async function onDragEnd() {
+  dragIndex.value = null
+  const payload = gallery.value.map((img, index) => ({ id: img.id, order: index }))
+  await store.reorderProjectImages(route.params.id, payload)
+}
+
+function imageUrl(path) {
+  return `${import.meta.env.VITE_STORAGE_URL}/${path}`
 }
 
 async function handleSubmit() {
@@ -69,10 +115,11 @@ async function handleSubmit() {
   try {
     if (isEditing.value) {
       await store.updateProject(route.params.id, formData)
+      router.push({ name: 'admin-projects' })
     } else {
-      await store.createProject(formData)
+      const created = await store.createProject(formData)
+      router.push({ name: 'admin-projects-edit', params: { id: created.id } })
     }
-    router.push({ name: 'admin-projects' })
   } catch {
     // el error ya está en store.error
   }
@@ -197,7 +244,7 @@ async function handleSubmit() {
           for="image"
           class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
         >
-          Imagen
+          Portada <span class="normal-case text-slate-300">(imagen del listado)</span>
         </label>
         <div
           v-if="imagePreview"
@@ -230,5 +277,64 @@ async function handleSubmit() {
         </RouterLink>
       </div>
     </form>
+
+    <!-- Sección galería — solo visible al editar -->
+    <section v-if="isEditing && store.project" class="mt-16 pt-10 border-t border-stone-200">
+      <div class="mb-6">
+        <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-1">
+          Galería de capturas
+        </p>
+        <p class="font-sans text-xs text-slate-400">
+          Arrastra las imágenes para reordenarlas. Se guardan automáticamente.
+        </p>
+      </div>
+
+      <div v-if="gallery.length > 0" class="grid grid-cols-2 gap-3 mb-4">
+        <div
+          v-for="(img, index) in gallery"
+          :key="img.id"
+          draggable="true"
+          @dragstart="onDragStart(index)"
+          @dragover.prevent="onDragOver(index)"
+          @dragend="onDragEnd"
+          class="relative group rounded overflow-hidden border border-stone-200 aspect-video bg-stone-50 cursor-grab active:cursor-grabbing"
+          :class="{ 'opacity-50': dragIndex === index }"
+        >
+          <img
+            :src="imageUrl(img.path)"
+            :alt="`Captura ${index + 1}`"
+            class="w-full h-full object-cover pointer-events-none"
+          />
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/10" />
+          <button
+            type="button"
+            @click.stop="handleDeleteImage(img.id)"
+            class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 text-slate-600 hover:text-red-500 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm cursor-pointer"
+            :aria-label="`Eliminar imagen ${index + 1}`"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <label
+        class="flex items-center gap-3 cursor-pointer w-fit"
+        :class="{ 'opacity-50 cursor-not-allowed pointer-events-none': uploadingImages }"
+      >
+        <span
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 border border-stone-200 rounded px-4 py-2 hover:border-slate-400 hover:text-slate-800 transition-colors"
+        >
+          {{ uploadingImages ? 'Subiendo…' : '+ Añadir capturas' }}
+        </span>
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          multiple
+          class="sr-only"
+          @change="handleGalleryUpload"
+          :disabled="uploadingImages"
+        />
+      </label>
+    </section>
   </div>
 </template>

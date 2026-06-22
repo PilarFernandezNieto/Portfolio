@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    public function images()
+    {
+        return $this->hasMany(ProjectImage::class)->orderBy('order');
+    }
+
     protected $fillable = [
         'title',
         'description',

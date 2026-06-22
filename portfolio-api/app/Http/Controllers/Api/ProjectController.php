@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return response()->json([
@@ -22,9 +19,6 @@ class ProjectController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProjectRequest $request)
     {
         $data = $request->validated();
@@ -35,25 +29,20 @@ class ProjectController extends Controller
         $data['visible'] = filter_var($data['visible'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
         $project = Project::create($data);
+
         return response()->json([
             'message' => 'Proyecto creado correctamente',
-            'data'    => new ProjectResource($project),
+            'data'    => new ProjectResource($project->load('images')),
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Project $project)
     {
         return response()->json([
-            'data' => new ProjectResource($project),
+            'data' => new ProjectResource($project->load('images')),
         ], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProjectRequest $request, Project $project)
     {
         $data = $request->validated();
@@ -70,17 +59,18 @@ class ProjectController extends Controller
 
         return response()->json([
             'message' => 'Proyecto actualizado correctamente',
-            'data'    => new ProjectResource($project),
+            'data'    => new ProjectResource($project->load('images')),
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Project $project)
     {
         if ($project->image) {
             Storage::disk('public')->delete($project->image);
+        }
+
+        foreach ($project->images as $image) {
+            Storage::disk('public')->delete($image->path);
         }
 
         $project->delete();

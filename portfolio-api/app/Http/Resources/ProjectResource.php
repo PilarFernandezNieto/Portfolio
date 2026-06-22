@@ -7,22 +7,24 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'image' => $this->image,
-            'url' => $this->url,
+            'id'           => $this->id,
+            'title'        => $this->title,
+            'description'  => $this->description,
+            'image'        => $this->image,
+            'url'          => $this->url,
             'technologies' => $this->technologies,
-            'order' => $this->order,
-            'visible' => $this->visible
+            'order'        => $this->order,
+            'visible'      => $this->visible,
+            'images'       => $this->whenLoaded('images', function () {
+                return $this->images->map(fn($img) => [
+                    'id'    => $img->id,
+                    'path'  => $img->path,
+                    'order' => $img->order,
+                ])->values();
+            }, []),
         ];
     }
 }
