@@ -28,7 +28,12 @@ class ProjectController extends Controller
         }
         $data['visible'] = filter_var($data['visible'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
+
+
         $project = Project::create($data);
+
+
+
 
         return response()->json([
             'message' => 'Proyecto creado correctamente',

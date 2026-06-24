@@ -318,7 +318,7 @@ async function handleSubmit() {
       </div>
 
       <label
-        class="flex items-center gap-3 cursor-pointer w-fit"
+        class="relative flex items-center gap-3 cursor-pointer w-fit"
         :class="{ 'opacity-50 cursor-not-allowed pointer-events-none': uploadingImages }"
       >
         <span
@@ -330,6 +330,7 @@ async function handleSubmit() {
           type="file"
           accept="image/jpeg,image/png,image/webp"
           multiple
+          tabindex="-1"
           class="sr-only"
           @change="handleGalleryUpload"
           :disabled="uploadingImages"
