@@ -40,9 +40,10 @@ const router = createRouter({
       name: 'admin',
       component: () => import('../views/admin/AdminView.vue'),
       meta: { requiredAuth: true },
+      redirect: { name: 'admin-projects' },
       children: [
         {
-          path: 'proyectos',
+          path: '',
           name: 'admin-projects',
           component: () => import('../views/admin/ProjectsAdminView.vue'),
         },
@@ -78,7 +79,7 @@ router.beforeEach((to) => {
     return { name: 'login' }
   }
   if (to.name === 'login' && auth.isAuthenticated) {
-    return { name: 'admin' }
+    return { name: 'admin-projects' }
   }
 })
 

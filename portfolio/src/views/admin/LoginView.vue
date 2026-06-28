@@ -17,7 +17,7 @@ async function handleLogin() {
   loading.value = true
   try {
     await auth.login(credentials.value)
-    router.push({ name: 'admin' })
+    router.push({ name: 'admin-projects' })
   } catch {
     // el error ya está en auth.error
   } finally {
