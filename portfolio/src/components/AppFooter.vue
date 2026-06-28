@@ -7,7 +7,7 @@
     >
       <p class="font-sans text-xs text-slate-400">© 2025 Pilar Fernández Nieto</p>
       <a
-        href="/cv.pdf"
+        href="/CV_PilarFernandezNieto.pdf"
         download
         class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-2"
         aria-label="Descargar CV en PDF"
