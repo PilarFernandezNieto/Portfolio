@@ -98,6 +98,12 @@ const hasGallery = computed(() => store.project?.images?.length > 0)
           <div class="w-10 h-0.5 bg-slate-300"></div>
         </div>
         <div class="md:col-span-2">
+          <p
+            v-if="store.project.intro"
+            class="font-sans text-lg text-slate-700 leading-relaxed mb-6 font-normal"
+          >
+            {{ store.project.intro }}
+          </p>
           <div
             class="rich-text font-sans text-base text-slate-600 leading-relaxed mb-8"
             v-html="sanitizedDescription"

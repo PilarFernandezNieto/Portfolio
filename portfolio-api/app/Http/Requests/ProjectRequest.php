@@ -22,6 +22,7 @@ class ProjectRequest extends FormRequest
         $required = $this->isMethod('POST') ? 'required' : 'sometimes';
         return [
             'title' => "$required|string|max:255",
+            'intro' => 'nullable|string|max:500',
             'description' => "$required|string",
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'url' => 'nullable|url',

@@ -15,6 +15,7 @@ const gallery = ref([])
 
 const form = ref({
   title: '',
+  intro: '',
   description: '',
   url: '',
   technologies: '',
@@ -29,6 +30,7 @@ onMounted(async () => {
     const p = store.project
     form.value = {
       title: p.title,
+      intro: p.intro || '',
       description: p.description,
       url: p.url || '',
       technologies: p.technologies.join(', '),
@@ -96,6 +98,7 @@ function imageUrl(path) {
 async function handleSubmit() {
   const formData = new FormData()
   formData.append('title', form.value.title)
+  formData.append('intro', form.value.intro)
   formData.append('description', form.value.description)
   formData.append('url', form.value.url)
   formData.append('order', form.value.order)
@@ -164,10 +167,26 @@ async function handleSubmit() {
 
       <div class="flex flex-col gap-2">
         <label
+          for="intro"
+          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+        >
+          Intro <span class="normal-case text-slate-300">(resumen breve para el listado, máx. 500 caracteres)</span>
+        </label>
+        <textarea
+          id="intro"
+          v-model="form.intro"
+          rows="3"
+          maxlength="500"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors resize-none"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label
           for="description"
           class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
         >
-          Descripción
+          Descripción <span class="normal-case text-slate-300">(texto completo en la ficha del proyecto)</span>
         </label>
         <RichTextEditor v-model="form.description" />
       </div>
