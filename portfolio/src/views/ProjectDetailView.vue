@@ -1,9 +1,9 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
 import AppSpinner from '@/components/AppSpinner.vue'
-import ProjectGallery from '@/components/ProjectGallery.vue'
+import Galleria from 'primevue/galleria'
 import DOMPurify from 'dompurify'
 
 const route = useRoute()
@@ -24,6 +24,14 @@ const sanitizedDescription = computed(() =>
 )
 
 const hasGallery = computed(() => store.project?.images?.length > 0)
+
+const galleriaVisible = ref(false)
+const galleriaIndex = ref(0)
+
+function openGalleria(index) {
+  galleriaIndex.value = index
+  galleriaVisible.value = true
+}
 </script>
 
 <template>
@@ -63,12 +71,47 @@ const hasGallery = computed(() => store.project?.images?.length > 0)
       </header>
 
       <!-- Galería de capturas -->
-      <ProjectGallery
-        v-if="hasGallery"
-        :images="store.project.images"
-        :storageUrl="storageUrl"
-        class="mb-12"
-      />
+      <template v-if="hasGallery">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
+          <button
+            v-for="(img, index) in store.project.images"
+            :key="img.id"
+            type="button"
+            @click="openGalleria(index)"
+            class="group relative aspect-video rounded-lg overflow-hidden border border-stone-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+            :aria-label="`Ver captura ${index + 1} de ${store.project.images.length}`"
+          >
+            <img
+              :src="storageUrl(img.path)"
+              :alt="`Captura ${index + 1}`"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors" />
+          </button>
+        </div>
+
+        <Galleria
+          v-model:visible="galleriaVisible"
+          v-model:activeIndex="galleriaIndex"
+          :value="store.project.images"
+          :numVisible="5"
+          :fullScreen="true"
+          :showItemNavigators="true"
+          :circular="true"
+        >
+          <template #item="{ item }">
+            <img
+              :src="storageUrl(item.path)"
+              :alt="`Captura de ${store.project.title}`"
+              class="max-h-screen max-w-full object-contain"
+            />
+          </template>
+          <template #thumbnail="{ item }">
+            <img :src="storageUrl(item.path)" alt="" class="h-16 w-24 object-cover" />
+          </template>
+        </Galleria>
+      </template>
 
       <!-- Imagen portada como fallback si no hay galería -->
       <div
