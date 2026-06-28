@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
 import AppSpinner from '@/components/AppSpinner.vue'
+import ProjectGallery from '@/components/ProjectGallery.vue'
 import DOMPurify from 'dompurify'
 
 const route = useRoute()
@@ -62,21 +63,12 @@ const hasGallery = computed(() => store.project?.images?.length > 0)
       </header>
 
       <!-- Galería de capturas -->
-      <div v-if="hasGallery" class="mb-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div
-            v-for="img in store.project.images"
-            :key="img.id"
-            class="rounded-lg overflow-hidden border border-stone-200"
-          >
-            <img
-              :src="storageUrl(img.path)"
-              :alt="`Captura de ${store.project.title}`"
-              class="w-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
+      <ProjectGallery
+        v-if="hasGallery"
+        :images="store.project.images"
+        :storageUrl="storageUrl"
+        class="mb-12"
+      />
 
       <!-- Imagen portada como fallback si no hay galería -->
       <div
@@ -90,7 +82,7 @@ const hasGallery = computed(() => store.project?.images?.length > 0)
         />
       </div>
 
-      <section class="grid md:grid-cols-3 gap-12 md:gap-16">
+      <section class="grid md:grid-cols-3 gap-12 md:gap-16 mt-4">
         <div>
           <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
             Descripción
