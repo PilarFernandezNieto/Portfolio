@@ -20,9 +20,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401 && !error.config.url.includes('/login')) {
-      console.error('🔴 401 desde:', error.config.url)
       localStorage.removeItem('token')
-      // window.location.href = '/admin/login'  ← desactivado temporalmente para diagnosticar
+      window.location.href = '/admin/login'
     }
     return Promise.reject(error)
   }

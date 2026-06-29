@@ -16,6 +16,7 @@ const links = [
   { to: '/sobre-mi', name: 'about', label: 'Sobre mí' },
   { to: '/proyectos', name: 'projects', label: 'Proyectos' },
   { to: '/cv', name: 'cv', label: 'CV' },
+  { to: '/contacto', name: 'contact', label: 'Contacto' },
 ]
 </script>
 <template>
