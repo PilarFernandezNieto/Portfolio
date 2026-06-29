@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ProjectImageController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1');
 
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/projects/{project}', [ProjectController::class, 'show']);
