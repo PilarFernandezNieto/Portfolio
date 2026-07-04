@@ -23,7 +23,7 @@ export const useAboutStore = defineStore('about', () => {
   async function updateAbout(payload) {
     error.value = null
     try {
-      const { data } = await api.put(`/about/${about.value.id}`, payload)
+      const { data } = await api.put(`/admin/about/${about.value.id}`, payload)
       about.value = data.data
       return data.message
     } catch (e) {

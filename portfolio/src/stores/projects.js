@@ -37,7 +37,7 @@ export const useProjectsStore = defineStore('projects', () => {
   async function createProject(formData) {
     error.value = null
     try {
-      const { data } = await api.post('/projects', formData, {
+      const { data } = await api.post('/admin/projects', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       projects.value.push(data.data)
@@ -51,7 +51,7 @@ export const useProjectsStore = defineStore('projects', () => {
   async function updateProject(id, formData) {
     error.value = null
     try {
-      const { data } = await api.post(`/projects/${id}?_method=PUT`, formData, {
+      const { data } = await api.post(`/admin/projects/${id}?_method=PUT`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       const index = projects.value.findIndex((p) => p.id === id)
@@ -67,7 +67,7 @@ export const useProjectsStore = defineStore('projects', () => {
   async function deleteProject(id) {
     error.value = null
     try {
-      const { data } = await api.delete(`/projects/${id}`)
+      const { data } = await api.delete(`/admin/projects/${id}`)
       projects.value = projects.value.filter((p) => p.id !== id)
       return data.message
     } catch (e) {
@@ -81,7 +81,7 @@ export const useProjectsStore = defineStore('projects', () => {
     const formData = new FormData()
     files.forEach((file) => formData.append('images[]', file))
     try {
-      const { data } = await api.post(`/projects/${projectId}/images`, formData, {
+      const { data } = await api.post(`/admin/projects/${projectId}/images`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       if (project.value?.id === Number(projectId)) {
@@ -97,7 +97,7 @@ export const useProjectsStore = defineStore('projects', () => {
   async function deleteProjectImage(projectId, imageId) {
     error.value = null
     try {
-      await api.delete(`/projects/${projectId}/images/${imageId}`)
+      await api.delete(`/admin/projects/${projectId}/images/${imageId}`)
       if (project.value?.id === Number(projectId)) {
         project.value.images = project.value.images.filter((img) => img.id !== imageId)
       }
@@ -110,7 +110,7 @@ export const useProjectsStore = defineStore('projects', () => {
   async function reorderProjectImages(projectId, images) {
     error.value = null
     try {
-      await api.put(`/projects/${projectId}/images/reorder`, { images })
+      await api.put(`/admin/projects/${projectId}/images/reorder`, { images })
     } catch (e) {
       error.value = e.response?.data?.message || 'Error al reordenar las imágenes'
       throw e

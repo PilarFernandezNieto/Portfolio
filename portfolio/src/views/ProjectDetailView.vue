@@ -10,6 +10,8 @@ const route = useRoute()
 const router = useRouter()
 const store = useProjectsStore()
 
+console.log('Desde project Detal')
+
 onMounted(async () => {
   await store.fetchProject(route.params.id)
   if (!store.project) {
@@ -87,7 +89,9 @@ function openGalleria(index) {
               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors" />
+            <div
+              class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors"
+            />
           </button>
         </div>
 

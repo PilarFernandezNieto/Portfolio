@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout() {
     error.value = null
     try {
-      await api.post('/logout')
+      await api.post('/admin/logout')
     } catch (e) {
       // Si falla el logout en el servidor borramos el token igualmente
     } finally {

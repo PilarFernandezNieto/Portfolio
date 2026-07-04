@@ -1,275 +1,139 @@
-# Portfolio
+# Portfolio — Pilar Fernández Nieto
 
-Una aplicación fullstack moderna que combina un **frontend dinámico con Vue 3** y un **backend robusto con Laravel** para crear un portafolio profesional interactivo.
+Portfolio profesional fullstack: **Vue 3 + Vite** en el frontend y **Laravel 13** como API REST en el backend.
 
-## 📋 Descripción
+## Estructura del repositorio
 
-Este proyecto es una solución completa para gestionar y mostrar un portafolio profesional. Está dividido en dos componentes principales:
-
-- **Frontend (`portfolio/`)**: Aplicación moderna con Vue 3 + Vite, diseñada para ofrecer una experiencia de usuario fluida e interactiva
-- **Backend (`portfolio-api/`)**: API REST construida con Laravel 13 para gestionar datos del portafolio y autenticación
-
-## 🎯 Funcionalidades Principales
-
-### Frontend (Vue 3 + Vite)
-- ✨ Interfaz moderna y responsiva con **Tailwind CSS**
-- 🛣️ Enrutamiento con **Vue Router**
-- 📦 Gestión de estado con **Pinia**
-- 🔄 Comunicación con API mediante **Axios**
-- 🛡️ Sanitización de contenido HTML con **DOMPurify**
-- ⚡ Desarrollo rápido con Vite y Hot Module Replacement
-- 🔍 Linting con ESLint y Oxlint
-- 💻 Formatting automático con Prettier
-
-### Backend (Laravel 13)
-- 🔐 Autenticación con **Laravel Sanctum**
-- 🗄️ ORM elegante con **Eloquent**
-- 📦 Migraciones de base de datos
-- 🧪 Testing con PHPUnit
-- ⚙️ Validación y procesamiento de datos
-- 📝 Logging y debugging con Laravel Pail
-
-## 🚀 Requisitos Previos
-
-### Frontend
-- Node.js v20.19.0 o superior / v22.12.0 o superior
-- npm o yarn
-
-### Backend
-- PHP 8.3 o superior
-- Composer
-- SQLite o base de datos MySQL/PostgreSQL
-- Node.js (para assets frontend de Laravel)
-
-## 📦 Instalación
-
-### Setup Completo (Recomendado)
-
-Desde la raíz del proyecto, ejecuta el setup automático del backend:
-
-```bash
-cd portfolio-api
-composer run setup
+```
+Portfolio/
+├── portfolio/          # Frontend — Vue 3 + Vite + Tailwind CSS 4
+└── portfolio-api/       # Backend — Laravel 13 API REST
 ```
 
-Este comando ejecutará:
-1. Instalación de dependencias PHP
-2. Configuración de archivo `.env`
-3. Generación de clave de aplicación
-4. Migraciones de base de datos
-5. Instalación de dependencias Node.js
-6. Compilación de assets
+## Stack tecnológico
 
-### Setup Manual
+### Frontend (`portfolio/`)
+- **Vue 3** + **Vite**
+- **Vue Router** + **Pinia** (estado)
+- **Tailwind CSS 4**
+- **Axios** — cliente HTTP, con interceptores para token y logout automático en 401
+- **PrimeVue** (Galleria) — galería de imágenes de proyecto
+- **Tiptap** — editor de texto enriquecido (bio y descripción de proyectos)
+- **vue-draggable-plus** — reordenar imágenes de un proyecto por arrastre
+- **DOMPurify** — sanitizado de HTML antes de renderizar contenido enriquecido
+- **ESLint + Oxlint + Prettier** — linting y formato
 
-#### Backend
+### Backend (`portfolio-api/`)
+- **Laravel 13** sobre **PHP 8.3**
+- **Laravel Sanctum** — autenticación por *personal access tokens* (Bearer), sin cookies ni CSRF
+- **Eloquent ORM** + migraciones
+- **MySQL** (ver `DB_*` en `.env`)
+
+## Requisitos previos
+
+- Node.js `^20.19.0` o `>=22.12.0`
+- PHP `^8.3` + Composer
+- MySQL
+
+## Instalación
+
+### Backend
 
 ```bash
 cd portfolio-api
-
-# Instalar dependencias
 composer install
-
-# Configurar variables de entorno
 cp .env.example .env
-
-# Generar clave de aplicación
 php artisan key:generate
-
-# Ejecutar migraciones
+# Configura DB_* en .env (por defecto MySQL)
 php artisan migrate
-
-# Instalar dependencias frontend (para assets)
-npm install --ignore-scripts
-
-# Compilar assets
-npm run build
+php artisan storage:link   # necesario para servir imágenes subidas
+php artisan db:seed --class=AdminSeeder   # crea el único usuario admin
 ```
 
-#### Frontend
+### Frontend
 
 ```bash
 cd portfolio
-
-# Instalar dependencias
 npm install
-
-# (Opcional) Construir para producción
-npm run build
 ```
 
-## 🏃 Ejecución
+Variables de entorno (`portfolio/.env` o `.env.local`):
 
-### Desarrollo (Backend + Frontend Simultáneamente)
-
-Desde la carpeta `portfolio-api`:
-
-```bash
-npm run dev
+```env
+VITE_API_URL=http://127.0.0.1:8000/api
+VITE_STORAGE_URL=http://127.0.0.1:8000/storage
 ```
 
-Este comando inicia:
-- Servidor Laravel (http://localhost:8000)
-- Queue listener para trabajos en background
-- Laravel Pail para logging
-- Dev server de Vite
-
-### Solo Frontend
+## Desarrollo
 
 ```bash
-cd portfolio
-npm run dev
-```
-
-El servidor estará disponible en `http://localhost:5173`
-
-### Solo Backend
-
-```bash
+# Backend
 cd portfolio-api
-php artisan serve
-```
+php artisan serve                # http://localhost:8000
 
-El servidor estará disponible en `http://localhost:8000`
-
-## 🏗️ Compilación y Despliegue
-
-### Frontend - Producción
-
-```bash
+# Frontend (en otra terminal)
 cd portfolio
-npm run build
+npm run dev                       # http://localhost:5173
 ```
 
-Genera los archivos optimizados en `dist/`
+Alternativa: `composer run dev` en `portfolio-api/` levanta a la vez el servidor de Laravel, el queue listener, `pail` (logs) y Vite, vía `concurrently`.
 
-### Backend - Producción
-
-```bash
-cd portfolio-api
-php artisan optimize
-```
-
-## 📝 Scripts Disponibles
+## Scripts disponibles
 
 ### Frontend
 
 | Comando | Descripción |
 |---------|-------------|
-| `npm run dev` | Inicia servidor de desarrollo |
-| `npm run build` | Compila para producción |
-| `npm run preview` | Previsualiza build de producción |
-| `npm run lint` | Ejecuta todos los linters |
-| `npm run lint:oxlint` | Ejecuta Oxlint con fix |
-| `npm run lint:eslint` | Ejecuta ESLint con fix |
-| `npm run format` | Formatea código con Prettier |
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm run preview` | Previsualiza el build |
+| `npm run lint` | Oxlint + ESLint con autofix |
+| `npm run format` | Formatea `src/` con Prettier |
 
 ### Backend
 
 | Comando | Descripción |
 |---------|-------------|
-| `composer run dev` | Modo desarrollo completo |
-| `composer run test` | Ejecuta tests |
+| `composer run dev` | Servidor + queue + logs + Vite en paralelo |
+| `composer run test` | Ejecuta la suite de PHPUnit |
 | `php artisan migrate` | Ejecuta migraciones |
+| `php artisan route:list --path=api` | Lista las rutas de la API |
 | `php artisan tinker` | Shell interactivo |
 
-## 🛠️ Stack Tecnológico
+## API
 
-### Frontend
-- **Vue 3** - Framework progresivo de JavaScript
-- **Vite** - Bundler y servidor de desarrollo ultrarrápido
-- **Tailwind CSS** - Framework CSS utilitario
-- **Vue Router** - Enrutamiento client-side
-- **Pinia** - Gestión de estado
-- **Axios** - Cliente HTTP
-- **DOMPurify** - Sanitización de HTML
-- **ESLint + Oxlint** - Linting
-- **Prettier** - Code formatting
+Todas las rutas cuelgan de `/api`. Las de solo lectura son públicas; el resto vive bajo `/api/admin/*` y requiere `Authorization: Bearer {token}`.
 
-### Backend
-- **Laravel 13** - Framework PHP moderno
-- **PHP 8.3** - Lenguaje de programación
-- **Laravel Sanctum** - Autenticación API
-- **Eloquent ORM** - Mapeo de objetos relacionales
-- **PHPUnit** - Testing
-- **Composer** - Gestor de dependencias
+**Públicas**
+- `GET /projects` — proyectos visibles
+- `GET /projects/{id}` — ficha de un proyecto
+- `GET /about` — datos de "sobre mí"
+- `POST /login`
+- `POST /contact` (rate-limited)
 
-## 📊 Composición del Repositorio
+**Protegidas (`/admin/*`, requieren token Sanctum)**
+- `POST /admin/logout`
+- CRUD completo de `projects` y `about` (excepto `index`)
+- Subida, borrado y reordenado de imágenes de proyecto
 
-```
-Blade:       38.2% - Templates y configuración
-PHP:         36.3% - Lógica backend
-Vue:         19.8% - Componentes frontend
-JavaScript:   5.1% - Lógica adicional
-Otros:        0.6% - Configuraciones
-```
+Respuestas con el formato `{ "message": "...", "data": { ... } }`.
 
-## 🔐 Autenticación
+## Autenticación
 
-El proyecto utiliza **Laravel Sanctum** para autenticación segura:
-- Tokens SPA (Single Page Application)
-- Protección CSRF automática
-- Rate limiting en endpoints sensibles
+- Login devuelve un *personal access token* de Sanctum (`token` en la respuesta), no una cookie de sesión.
+- El frontend lo guarda en `localStorage` y lo añade como `Authorization: Bearer {token}` en cada petición (`portfolio/src/services/api.js`).
+- Un 401 de la API borra el token y redirige a `/admin/login`.
+- Solo existe un usuario administrador (sin registro público).
 
-## 🗄️ Base de Datos
-
-Por defecto, el proyecto usa **SQLite** para desarrollo. Para cambiar a otra base de datos:
-
-1. Edita `.env` en `portfolio-api/`
-2. Cambia las variables `DB_*`
-3. Ejecuta: `php artisan migrate:fresh`
-
-## 🧪 Testing
+## Testing
 
 ```bash
 cd portfolio-api
 composer run test
 ```
 
-## 🤝 Estructura del Proyecto
+> La suite actual solo contiene los tests de ejemplo generados por Laravel; no hay cobertura real todavía.
 
-```
-Portfolio/
-├── portfolio/               # Frontend - Vue 3 + Vite
-│   ├── src/
-│   │   ├── components/     # Componentes reutilizables
-│   │   ├── views/          # Páginas de la aplicación
-│   │   ├── stores/         # Estado Pinia
-│   │   └── App.vue         # Componente raíz
-│   └── package.json        # Dependencias frontend
-│
-└── portfolio-api/           # Backend - Laravel
-    ├── app/
-    │   ├── Http/           # Controllers y middleware
-    │   ├── Models/         # Modelos Eloquent
-    │   └── Services/       # Lógica de negocio
-    ├── routes/             # Definición de rutas API
-    ├── database/
-    │   └── migrations/     # Migraciones
-    ├── tests/              # Tests unitarios
-    └── composer.json       # Dependencias backend
-```
-
-## 📚 Documentación Adicional
-
-- [Documentación de Vue 3](https://vuejs.org/)
-- [Documentación de Vite](https://vitejs.dev/)
-- [Documentación de Laravel](https://laravel.com/docs)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Pinia State Management](https://pinia.vuejs.org/)
-
-## 📄 Licencia
-
-Este proyecto está licenciado bajo la licencia MIT. Ver archivo [LICENSE](LICENSE) para más detalles.
-
-## 👤 Autor
+## Autora
 
 **Pilar Fernández Nieto**
-
-## 🐛 Reportar Problemas
-
-Si encuentras algún problema, por favor crea un issue en el repositorio de GitHub.
-
----
-
-**Última actualización:** Mayo 2026
