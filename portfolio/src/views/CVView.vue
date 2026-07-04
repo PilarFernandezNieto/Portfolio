@@ -19,7 +19,7 @@
 
     <div class="flex justify-center">
       <iframe
-        src="/cv.pdf"
+        src="/CV_PilarFernandezNieto.pdf"
         class="w-full border border-stone-200 rounded-lg"
         style="height: 80vh"
         title="Currículum Vitae de Pilar Fernández Nieto"

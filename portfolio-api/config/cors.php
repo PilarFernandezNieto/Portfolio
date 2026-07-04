@@ -19,9 +19,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5173'],
+    'allowed_origins' => ['http://localhost:5173', 'https://euphonious-pithivier-8e16d9.netlify.app'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ['/^https:\/\/.*\.netlify\.app$/'],
 
     'allowed_headers' => ['*'],
 
