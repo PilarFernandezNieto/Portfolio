@@ -125,6 +125,46 @@ Respuestas con el formato `{ "message": "...", "data": { ... } }`.
 - Un 401 de la API borra el token y redirige a `/admin/login`.
 - Solo existe un usuario administrador (sin registro público).
 
+## Despliegue
+
+### Frontend (Netlify)
+
+El build de producción usa `portfolio/.env.production`, que ya apunta al backend real:
+
+```env
+VITE_API_URL=https://pilar-portfolio-api.duckdns.org/api
+VITE_STORAGE_URL=https://pilar-portfolio-api.duckdns.org/storage
+```
+
+Vite hornea esas variables **dentro** del bundle en tiempo de build (no se leen en runtime), así que cualquier método de despliegue debe generar el `dist/` con `npm run build` (modo `production` por defecto) para que apunten al backend correcto.
+
+El fallback de rutas para el SPA (necesario porque Vue Router usa `history` mode y Netlify por defecto no sabe resolver `/proyectos/3` como si fuera `/index.html`) ya está resuelto por partida doble: `portfolio/netlify.toml` y `portfolio/public/_redirects` (este último se copia dentro de `dist/` en cada build). No hace falta tocar nada.
+
+**Opción A — Arrastrar `dist/` (manual):**
+
+```bash
+cd portfolio
+npm run build
+```
+
+Sube el contenido de `portfolio/dist/` a Netlify (deploy manual, arrastrando la carpeta). Válido y suficiente para un despliegue puntual, pero cada cambio futuro exige repetir el build y volver a subirlo a mano.
+
+**Opción B — Conectar el repositorio (recomendado):**
+
+Como es un monorepo con `portfolio/` y `portfolio-api/`, en la configuración del site en Netlify:
+
+| Campo | Valor |
+|---|---|
+| Base directory | `portfolio` |
+| Build command | `npm run build` |
+| Publish directory | `dist` (relativo a la base) |
+
+Con esto Netlify reconstruye y publica automáticamente en cada `git push`, sin pasos manuales.
+
+### Backend
+
+El backend (Laravel) **no** se despliega en Netlify — corre en el VPS propio (`pilar-portfolio-api.duckdns.org`). `portfolio-api/config/cors.php` ya permite el origen exacto de Netlify y cualquier subdominio `*.netlify.app` vía `allowed_origins_patterns`, así que un cambio de subdominio de Netlify no rompe CORS.
+
 ## Testing
 
 ```bash
