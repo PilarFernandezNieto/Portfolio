@@ -43,7 +43,7 @@ async function handleSubmit() {
 <template>
   <div class="max-w-2xl">
     <header class="mb-10">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-2">
+      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-2">
         Administración
       </p>
       <h1 class="font-serif text-3xl text-slate-800 font-normal">Sobre mí</h1>
@@ -69,7 +69,7 @@ async function handleSubmit() {
       <div class="flex flex-col gap-2">
         <label
           for="bio"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
           Biografía
         </label>
@@ -78,13 +78,13 @@ async function handleSubmit() {
 
       <div class="flex flex-col gap-4">
         <div class="flex justify-between items-center">
-          <label class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold">
+          <label class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold">
             Detalles
           </label>
           <button
             type="button"
             @click="addDetail"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
           >
             + Añadir
           </button>
@@ -95,13 +95,13 @@ async function handleSubmit() {
             v-model="detail.label"
             type="text"
             placeholder="Etiqueta"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors flex-1"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors flex-1"
           />
           <input
             v-model="detail.value"
             type="text"
             placeholder="Valor"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors flex-1"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors flex-1"
           />
           <button
             type="button"

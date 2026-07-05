@@ -132,7 +132,7 @@ async function handleSubmit() {
 <template>
   <div class="max-w-2xl">
     <header class="mb-10">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-2">
+      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-2">
         {{ isEditing ? 'Editar proyecto' : 'Nuevo proyecto' }}
       </p>
       <h1 class="font-serif text-3xl text-slate-800 font-normal">
@@ -152,7 +152,7 @@ async function handleSubmit() {
       <div class="flex flex-col gap-2">
         <label
           for="title"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
           Título
         </label>
@@ -161,32 +161,36 @@ async function handleSubmit() {
           v-model="form.title"
           type="text"
           required
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
         />
       </div>
 
       <div class="flex flex-col gap-2">
         <label
           for="intro"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
-          Intro <span class="normal-case text-slate-300">(resumen breve para el listado, máx. 500 caracteres)</span>
+          Intro
+          <span class="normal-case text-slate-300"
+            >(resumen breve para el listado, máx. 500 caracteres)</span
+          >
         </label>
         <textarea
           id="intro"
           v-model="form.intro"
           rows="3"
           maxlength="500"
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors resize-none"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors resize-none"
         />
       </div>
 
       <div class="flex flex-col gap-2">
         <label
           for="description"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
-          Descripción <span class="normal-case text-slate-300">(texto completo en la ficha del proyecto)</span>
+          Descripción
+          <span class="normal-case text-slate-300">(texto completo en la ficha del proyecto)</span>
         </label>
         <RichTextEditor v-model="form.description" />
       </div>
@@ -194,7 +198,7 @@ async function handleSubmit() {
       <div class="flex flex-col gap-2">
         <label
           for="url"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
           URL externa
         </label>
@@ -202,14 +206,14 @@ async function handleSubmit() {
           id="url"
           v-model="form.url"
           type="url"
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
         />
       </div>
 
       <div class="flex flex-col gap-2">
         <label
           for="technologies"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
           Tecnologías <span class="normal-case text-slate-300">(separadas por comas)</span>
         </label>
@@ -219,7 +223,7 @@ async function handleSubmit() {
           type="text"
           placeholder="PHP, Laravel, Vue.js"
           required
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
         />
       </div>
 
@@ -227,7 +231,7 @@ async function handleSubmit() {
         <div class="flex flex-col gap-2 flex-1">
           <label
             for="order"
-            class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
           >
             Orden
           </label>
@@ -236,12 +240,12 @@ async function handleSubmit() {
             v-model="form.order"
             type="number"
             min="0"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
           />
         </div>
 
         <div class="flex flex-col gap-2 justify-end pb-1">
-          <label class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold">
+          <label class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold">
             Visible
           </label>
           <div class="flex items-center gap-3 px-4 py-3">
@@ -261,7 +265,7 @@ async function handleSubmit() {
       <div class="flex flex-col gap-2">
         <label
           for="image"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
         >
           Portada <span class="normal-case text-slate-300">(imagen del listado)</span>
         </label>
@@ -290,7 +294,7 @@ async function handleSubmit() {
         </button>
         <RouterLink
           :to="{ name: 'admin-projects' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 px-6 py-3 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 px-6 py-3 transition-colors"
         >
           Cancelar
         </RouterLink>
@@ -300,10 +304,10 @@ async function handleSubmit() {
     <!-- Sección galería — solo visible al editar -->
     <section v-if="isEditing && store.project" class="mt-16 pt-10 border-t border-stone-200">
       <div class="mb-6">
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-1">
+        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-1">
           Galería de capturas
         </p>
-        <p class="font-sans text-xs text-slate-400">
+        <p class="font-sans text-xs text-slate-500">
           Arrastra las imágenes para reordenarlas. Se guardan automáticamente.
         </p>
       </div>
@@ -324,7 +328,9 @@ async function handleSubmit() {
             :alt="`Captura ${index + 1}`"
             class="w-full h-full object-cover pointer-events-none"
           />
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/10" />
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/10"
+          />
           <button
             type="button"
             @click.stop="handleDeleteImage(img.id)"
@@ -341,7 +347,7 @@ async function handleSubmit() {
         :class="{ 'opacity-50 cursor-not-allowed pointer-events-none': uploadingImages }"
       >
         <span
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 border border-stone-200 rounded px-4 py-2 hover:border-slate-400 hover:text-slate-800 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 border border-stone-200 rounded px-4 py-2 hover:border-slate-500 hover:text-slate-800 transition-colors"
         >
           {{ uploadingImages ? 'Subiendo…' : '+ Añadir capturas' }}
         </span>

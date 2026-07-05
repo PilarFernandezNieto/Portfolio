@@ -204,7 +204,7 @@ Todas las respuestas siguen esta estructura:
 - **Paleta:** colores de Tailwind, familia `slate` para azules grisáceos, `stone` para fondos cálidos
 - **Tipografía:** DM Serif Display (títulos) + DM Sans (cuerpo) — importadas desde Google Fonts en `index.html`
 - **Fondo:** `stone-50` (crema muy suave), no fondo oscuro
-- **Acento:** `slate-400` / `slate-500` para enlaces y detalles
+- **Acento:** `slate-500` / `slate-600` para enlaces y detalles
 - **Diseño:** editorial, limpio, mucho espacio, sin florituras
 - **Accesibilidad:** ARIA labels, roles, skip to content, semántica HTML correcta
 - **Responsive:** mobile first con Tailwind

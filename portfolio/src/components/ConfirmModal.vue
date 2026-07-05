@@ -20,14 +20,14 @@ const { accept, cancel } = useConfirm()
         <h2 id="confirm-title" class="font-serif text-xl text-slate-800 font-normal mb-3">
           {{ title }}
         </h2>
-        <p class="font-sans text-sm text-slate-500 leading-relaxed mb-8">
+        <p class="font-sans text-sm text-slate-600 leading-relaxed mb-8">
           {{ message }}
         </p>
 
         <div class="flex justify-end gap-3">
           <button
             @click="cancel"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 px-5 py-3 rounded border border-stone-200 hover:border-slate-400 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 px-5 py-3 rounded border border-stone-200 hover:border-slate-500 transition-colors"
           >
             Cancelar
           </button>

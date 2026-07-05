@@ -29,7 +29,7 @@ watch(
 
 <template>
   <div
-    class="border border-stone-200 rounded overflow-hidden focus-within:border-slate-400 transition-colors"
+    class="border border-stone-200 rounded overflow-hidden focus-within:border-slate-500 transition-colors"
   >
     <div class="flex flex-wrap gap-1 border-b border-stone-200 bg-stone-50 px-3 py-2">
       <button
@@ -38,7 +38,7 @@ watch(
         :class="
           editor?.isActive('bold')
             ? 'bg-slate-200 text-slate-900'
-            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+            : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
         "
         class="w-8 h-8 flex items-center justify-center text-sm font-bold rounded transition-colors"
         title="Negrita"
@@ -52,7 +52,7 @@ watch(
         :class="
           editor?.isActive('italic')
             ? 'bg-slate-200 text-slate-900'
-            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+            : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
         "
         class="w-8 h-8 flex items-center justify-center text-sm italic rounded transition-colors"
         title="Cursiva"
@@ -68,7 +68,7 @@ watch(
         :class="
           editor?.isActive('heading', { level: 2 })
             ? 'bg-slate-200 text-slate-900'
-            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+            : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
         "
         class="w-8 h-8 flex items-center justify-center text-xs font-bold rounded transition-colors"
         title="Encabezado"
@@ -82,7 +82,7 @@ watch(
         :class="
           editor?.isActive('heading', { level: 3 })
             ? 'bg-slate-200 text-slate-900'
-            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+            : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
         "
         class="w-8 h-8 flex items-center justify-center text-xs font-bold rounded transition-colors"
         title="Subencabezado"
@@ -98,7 +98,7 @@ watch(
         :class="
           editor?.isActive('bulletList')
             ? 'bg-slate-200 text-slate-900'
-            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+            : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
         "
         class="w-8 h-8 flex items-center justify-center text-sm rounded transition-colors"
         title="Lista"
@@ -112,7 +112,7 @@ watch(
         :class="
           editor?.isActive('orderedList')
             ? 'bg-slate-200 text-slate-900'
-            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+            : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
         "
         class="w-8 h-8 flex items-center justify-center text-xs rounded transition-colors"
         title="Lista numerada"
@@ -126,7 +126,7 @@ watch(
         type="button"
         @click="editor.chain().focus().undo().run()"
         :disabled="!editor?.can().undo()"
-        class="w-8 h-8 flex items-center justify-center text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 disabled:opacity-30 rounded transition-colors"
+        class="w-8 h-8 flex items-center justify-center text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 disabled:opacity-30 rounded transition-colors"
         title="Deshacer"
       >
         ↩
@@ -136,7 +136,7 @@ watch(
         type="button"
         @click="editor.chain().focus().redo().run()"
         :disabled="!editor?.can().redo()"
-        class="w-8 h-8 flex items-center justify-center text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 disabled:opacity-30 rounded transition-colors"
+        class="w-8 h-8 flex items-center justify-center text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 disabled:opacity-30 rounded transition-colors"
         title="Rehacer"
       >
         ↪

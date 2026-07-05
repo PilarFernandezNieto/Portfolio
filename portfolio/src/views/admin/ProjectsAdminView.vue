@@ -13,7 +13,10 @@ onMounted(() => {
 })
 
 async function handleDelete(id) {
-  const ok = await confirm({ title: 'Eliminar proyecto', message: '¿Seguro que quieres eliminar este proyecto? Esta acción no se puede deshacer.' })
+  const ok = await confirm({
+    title: 'Eliminar proyecto',
+    message: '¿Seguro que quieres eliminar este proyecto? Esta acción no se puede deshacer.',
+  })
   if (!ok) return
   try {
     const message = await store.deleteProject(id)
@@ -29,7 +32,7 @@ async function handleDelete(id) {
   <div>
     <header class="flex justify-between items-center mb-10">
       <div>
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-2">
+        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-2">
           Administración
         </p>
         <h1 class="font-serif text-3xl text-slate-800 font-normal">Proyectos</h1>
@@ -82,7 +85,7 @@ async function handleDelete(id) {
         <div class="flex gap-4 shrink-0 ml-6">
           <RouterLink
             :to="{ name: 'admin-projects-edit', params: { id: project.id } }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
           >
             Editar
           </RouterLink>
@@ -96,7 +99,7 @@ async function handleDelete(id) {
       </div>
 
       <div v-if="!store.loading && store.projects.length === 0" class="text-center py-24">
-        <p class="font-sans text-sm text-slate-400">No hay proyectos todavía.</p>
+        <p class="font-sans text-sm text-slate-500">No hay proyectos todavía.</p>
       </div>
     </div>
   </div>

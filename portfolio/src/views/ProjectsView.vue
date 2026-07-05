@@ -14,7 +14,7 @@ onMounted(() => {
 <template>
   <div class="max-w-5xl mx-auto px-6 py-24">
     <header class="border-b border-stone-200 pb-12 mb-12">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
         Proyectos
       </p>
       <h1 class="font-serif text-4xl text-slate-800 font-normal">Cosas que he construido</h1>

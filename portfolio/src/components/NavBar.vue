@@ -55,7 +55,7 @@ const links = [
         <li v-for="link in links" :key="link.to">
           <RouterLink
             :to="{ name: link.name }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
             :class="{ 'text-slate-800 font-semibold': route.name === link.name }"
           >
             {{ link.label }}
@@ -64,7 +64,7 @@ const links = [
         <li v-if="auth.isAuthenticated">
           <RouterLink
             :to="{ name: 'admin' }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-400 border border-stone-300 px-3 py-1.5 rounded hover:text-slate-700 hover:border-slate-400 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 border border-stone-300 px-3 py-1.5 rounded hover:text-slate-700 hover:border-slate-500 transition-colors"
           >
             Admin
           </RouterLink>
@@ -79,7 +79,7 @@ const links = [
       <li v-for="link in links" :key="link.to">
         <RouterLink
           :to="{ name: link.name }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-800 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
           :class="{ 'text-slate-800 font-semibold': route.name === link.name }"
           @click="menuOpen = false"
         >
@@ -89,7 +89,7 @@ const links = [
       <li v-if="auth.isAuthenticated">
         <RouterLink
           :to="{ name: 'admin' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 hover:text-slate-700 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-700 transition-colors"
           @click="menuOpen = false"
         >
           Admin

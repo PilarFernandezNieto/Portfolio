@@ -27,18 +27,21 @@ onMounted(() => {
         aria-labelledby="about-heading"
       >
         <div>
-          <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+          <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
             Sobre mí
           </p>
           <div class="w-10 h-0.5 bg-slate-300"></div>
         </div>
         <div class="md:col-span-2">
-          <div class="rich-text font-serif text-2xl text-slate-800 leading-relaxed" v-html="sanitizedBio" />
+          <div
+            class="rich-text font-serif text-2xl text-slate-800 leading-relaxed"
+            v-html="sanitizedBio"
+          />
         </div>
       </section>
       <section class="grid md:grid-cols-3 gap-12 md:gap-16" aria-labelledby="details-heading">
         <div>
-          <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+          <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
             Detalles
           </p>
           <div class="w-10 h-0.5 bg-slate-300"></div>
@@ -49,7 +52,7 @@ onMounted(() => {
             :key="detail.label"
             class="flex justify-between items-baseline border-b border-stone-200 pb-4 last:border-0 last:pb-0"
           >
-            <dt class="font-sans text-xs tracking-widest uppercase text-slate-400">
+            <dt class="font-sans text-xs tracking-widest uppercase text-slate-500">
               {{ detail.label }}
             </dt>
             <dd class="font-sans text-sm text-slate-700">
@@ -60,7 +63,7 @@ onMounted(() => {
       </section>
     </template>
     <div v-else class="flex justify-center py-24">
-      <p class="font-sans text-sm text-slate-400">No hay información disponible.</p>
+      <p class="font-sans text-sm text-slate-500">No hay información disponible.</p>
     </div>
   </div>
 </template>

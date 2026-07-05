@@ -25,7 +25,7 @@ async function handleSubmit() {
 <template>
   <div class="max-w-4xl mx-auto px-6 py-24">
     <header class="border-b border-stone-200 pb-12 mb-12">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
         Contacto
       </p>
       <h1 class="font-serif text-4xl text-slate-800 font-normal">Hablemos</h1>
@@ -33,7 +33,7 @@ async function handleSubmit() {
 
     <div class="grid md:grid-cols-3 gap-12 md:gap-16">
       <div>
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
           Mensaje
         </p>
         <div class="w-10 h-0.5 bg-slate-300"></div>
@@ -48,16 +48,11 @@ async function handleSubmit() {
           Mensaje enviado. Me pondré en contacto contigo pronto.
         </div>
 
-        <form
-          v-if="!success"
-          @submit.prevent="handleSubmit"
-          class="flex flex-col gap-6"
-          novalidate
-        >
+        <form v-if="!success" @submit.prevent="handleSubmit" class="flex flex-col gap-6" novalidate>
           <div class="flex flex-col gap-2">
             <label
               for="name"
-              class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+              class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
             >
               Nombre
             </label>
@@ -67,14 +62,14 @@ async function handleSubmit() {
               type="text"
               required
               autocomplete="name"
-              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
             />
           </div>
 
           <div class="flex flex-col gap-2">
             <label
               for="email"
-              class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+              class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
             >
               Email
             </label>
@@ -84,14 +79,14 @@ async function handleSubmit() {
               type="email"
               required
               autocomplete="email"
-              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
             />
           </div>
 
           <div class="flex flex-col gap-2">
             <label
               for="message"
-              class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+              class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
             >
               Mensaje
             </label>
@@ -100,15 +95,11 @@ async function handleSubmit() {
               v-model="form.message"
               rows="6"
               required
-              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors resize-none"
+              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors resize-none"
             />
           </div>
 
-          <div
-            v-if="error"
-            role="alert"
-            class="font-sans text-sm text-red-500"
-          >
+          <div v-if="error" role="alert" class="font-sans text-sm text-red-500">
             {{ error }}
           </div>
 

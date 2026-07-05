@@ -24,14 +24,14 @@ const imageUrl = computed(() =>
         :alt="project.title"
         class="w-full h-full object-cover"
       />
-      <span v-else class="font-serif text-slate-400 text-lg">{{ project.title }}</span>
+      <span v-else class="font-serif text-slate-500 text-lg">{{ project.title }}</span>
     </div>
 
     <div class="p-6">
       <h2 class="font-serif text-xl text-slate-800 mb-2">
         {{ project.title }}
       </h2>
-      <p v-if="project.intro" class="font-sans text-sm text-slate-500 leading-relaxed mb-4">
+      <p v-if="project.intro" class="font-sans text-sm text-slate-600 leading-relaxed mb-4">
         {{ project.intro }}
       </p>
 
@@ -48,7 +48,7 @@ const imageUrl = computed(() =>
       <div class="flex flex-wrap gap-4">
         <RouterLink
           :to="{ name: 'project-detail', params: { id: project.id } }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
           :aria-label="`Ver ficha de ${project.title}`"
         >
           Ver ficha →
@@ -58,7 +58,7 @@ const imageUrl = computed(() =>
           :href="project.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 border-b-2 border-stone-200 pb-0.5 hover:text-slate-600 hover:border-slate-400 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-stone-200 pb-0.5 hover:text-slate-600 hover:border-slate-500 transition-colors"
           :aria-label="`Abrir ${project.title} en nueva pestaña`"
         >
           Enlace externo ↗

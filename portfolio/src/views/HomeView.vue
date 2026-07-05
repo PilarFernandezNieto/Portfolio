@@ -6,7 +6,7 @@
     aria-labelledby="hero-heading"
   >
     <div>
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-6">
+      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-6">
         Desarrolladora Full-Stack · Gijón
       </p>
       <h1
@@ -15,18 +15,18 @@
       >
         Código que<br />
         funciona para<br />
-        <em class="text-slate-400 not-italic">quien lo usa.</em>
+        <em class="text-slate-500 not-italic">quien lo usa.</em>
       </h1>
     </div>
 
     <div>
-      <p class="font-sans text-base text-slate-500 leading-relaxed mb-8">
+      <p class="font-sans text-base text-slate-600 leading-relaxed mb-8">
         Llegué a la programación después de años trabajando de cara al público. Me importa que las
         cosas funcionen bien para quien las usa, no solo para quien las escribe.
       </p>
       <RouterLink
         to="/proyectos"
-        class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
+        class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
       >
         Ver proyectos →
       </RouterLink>

@@ -30,7 +30,7 @@ async function handleLogin() {
   <div class="min-h-screen bg-stone-50 flex items-center justify-center px-6">
     <div class="w-full max-w-sm">
       <div class="mb-10">
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
           Panel de administración
         </p>
         <h1 class="font-serif text-4xl text-slate-800 font-normal">Acceder</h1>
@@ -40,7 +40,7 @@ async function handleLogin() {
         <div class="flex flex-col gap-2">
           <label
             for="email"
-            class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
           >
             Email
           </label>
@@ -50,14 +50,14 @@ async function handleLogin() {
             type="email"
             autocomplete="email"
             required
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
           />
         </div>
 
         <div class="flex flex-col gap-2">
           <label
             for="password"
-            class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
           >
             Contraseña
           </label>
@@ -67,7 +67,7 @@ async function handleLogin() {
             type="password"
             autocomplete="current-password"
             required
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-400 transition-colors"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
           />
         </div>
 

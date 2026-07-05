@@ -48,14 +48,14 @@ function openGalleria(index) {
       <nav class="mb-12">
         <RouterLink
           :to="{ name: 'projects' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-400 hover:text-slate-700 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-700 transition-colors"
         >
           ← Proyectos
         </RouterLink>
       </nav>
 
       <header class="border-b border-stone-200 pb-12 mb-12">
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
           Proyecto
         </p>
         <h1 class="font-serif text-4xl text-slate-800 font-normal mb-6">
@@ -80,7 +80,7 @@ function openGalleria(index) {
             :key="img.id"
             type="button"
             @click="openGalleria(index)"
-            class="group relative aspect-video rounded-lg overflow-hidden border border-stone-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+            class="group relative aspect-video rounded-lg overflow-hidden border border-stone-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
             :aria-label="`Ver captura ${index + 1} de ${store.project.images.length}`"
           >
             <img
@@ -131,7 +131,7 @@ function openGalleria(index) {
 
       <section class="grid md:grid-cols-3 gap-12 md:gap-16 mt-4">
         <div>
-          <p class="font-sans text-xs tracking-widest uppercase text-slate-400 font-semibold mb-4">
+          <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
             Descripción
           </p>
           <div class="w-10 h-0.5 bg-slate-300"></div>
@@ -152,7 +152,7 @@ function openGalleria(index) {
             :href="store.project.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
             :aria-label="`Ver proyecto ${store.project.title}`"
           >
             Ver proyecto →
