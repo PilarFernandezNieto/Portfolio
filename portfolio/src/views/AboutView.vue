@@ -2,6 +2,8 @@
 import { computed, onMounted } from 'vue'
 import { useAboutStore } from '@/stores/about'
 import AppSpinner from '@/components/AppSpinner.vue'
+import SectionTag from '@/components/SectionTag.vue'
+import BackgroundBlob from '@/components/BackgroundBlob.vue'
 import DOMPurify from 'dompurify'
 
 const aboutStore = useAboutStore()
@@ -22,40 +24,27 @@ onMounted(() => {
       <p class="font-sans text-sm text-red-400">{{ aboutStore.error }}</p>
     </div>
     <template v-else-if="aboutStore.about">
-      <section
-        class="grid md:grid-cols-3 gap-12 md:gap-16 border-b border-stone-200 pb-16 mb-16"
-        aria-labelledby="about-heading"
-      >
-        <div>
-          <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
-            Sobre mí
-          </p>
-          <div class="w-10 h-0.5 bg-slate-300"></div>
-        </div>
-        <div class="md:col-span-2">
-          <div
-            class="rich-text font-serif text-2xl text-slate-800 leading-relaxed"
-            v-html="sanitizedBio"
-          />
-        </div>
+      <section class="relative mb-20" aria-labelledby="about-heading">
+        <BackgroundBlob color="#F7DB88" size="300px" top="-4rem" right="-8rem" :opacity="0.35" />
+        <SectionTag label="Sobre mí" class="mb-6" />
+        <div
+          class="rich-text font-serif text-2xl md:text-3xl text-slate-800 leading-relaxed bg-blush/40 border border-blush rounded-2xl px-8 py-10 md:px-12 md:py-12"
+          v-html="sanitizedBio"
+        />
       </section>
-      <section class="grid md:grid-cols-3 gap-12 md:gap-16" aria-labelledby="details-heading">
-        <div>
-          <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
-            Detalles
-          </p>
-          <div class="w-10 h-0.5 bg-slate-300"></div>
-        </div>
-        <dl class="md:col-span-2 flex flex-col gap-4">
+
+      <section aria-labelledby="details-heading">
+        <SectionTag label="Detalles" color="periwinkle" class="mb-6" />
+        <dl class="grid sm:grid-cols-2 gap-4">
           <div
             v-for="detail in aboutStore.about.details"
             :key="detail.label"
-            class="flex justify-between items-baseline border-b border-stone-200 pb-4 last:border-0 last:pb-0"
+            class="border border-stone-200 rounded-lg px-5 py-4 bg-white"
           >
-            <dt class="font-sans text-xs tracking-widest uppercase text-slate-500">
+            <dt class="font-sans text-xs tracking-widest uppercase text-slate-500 mb-1">
               {{ detail.label }}
             </dt>
-            <dd class="font-sans text-sm text-slate-700">
+            <dd class="font-sans text-sm text-slate-800 font-medium">
               {{ detail.value }}
             </dd>
           </div>

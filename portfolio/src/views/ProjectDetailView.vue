@@ -5,12 +5,11 @@ import { useProjectsStore } from '@/stores/projects'
 import AppSpinner from '@/components/AppSpinner.vue'
 import Galleria from 'primevue/galleria'
 import DOMPurify from 'dompurify'
+import SectionTag from '@/components/SectionTag.vue'
 
 const route = useRoute()
 const router = useRouter()
 const store = useProjectsStore()
-
-console.log('Desde project Detal')
 
 onMounted(async () => {
   await store.fetchProject(route.params.id)
@@ -48,24 +47,22 @@ function openGalleria(index) {
       <nav class="mb-12">
         <RouterLink
           :to="{ name: 'projects' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-700 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-marigold transition-colors"
         >
           ← Proyectos
         </RouterLink>
       </nav>
 
-      <header class="border-b border-stone-200 pb-12 mb-12">
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
-          Proyecto
-        </p>
-        <h1 class="font-serif text-4xl text-slate-800 font-normal mb-6">
+      <header class="pb-12 mb-12">
+        <SectionTag label="Proyecto" class="mb-4" />
+        <h1 class="font-serif text-4xl text-slate-800 font-normal mb-6 mt-2">
           {{ store.project.title }}
         </h1>
         <ul class="flex flex-wrap gap-2" aria-label="Tecnologías utilizadas">
           <li
             v-for="tech in store.project.technologies"
             :key="tech"
-            class="font-sans text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-sm font-semibold"
+            class="font-sans text-xs bg-blush/60 text-slate-700 px-3 py-1 rounded-sm font-semibold"
           >
             {{ tech }}
           </li>
@@ -80,7 +77,7 @@ function openGalleria(index) {
             :key="img.id"
             type="button"
             @click="openGalleria(index)"
-            class="group relative aspect-video rounded-lg overflow-hidden border border-stone-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+            class="group relative aspect-video rounded-lg overflow-hidden border border-stone-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-periwinkle"
             :aria-label="`Ver captura ${index + 1} de ${store.project.images.length}`"
           >
             <img
@@ -129,14 +126,9 @@ function openGalleria(index) {
         />
       </div>
 
-      <section class="grid md:grid-cols-3 gap-12 md:gap-16 mt-4">
+      <section class="mt-4">
+        <SectionTag label="Descripción" color="periwinkle" class="mb-6" />
         <div>
-          <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
-            Descripción
-          </p>
-          <div class="w-10 h-0.5 bg-slate-300"></div>
-        </div>
-        <div class="md:col-span-2">
           <p
             v-if="store.project.intro"
             class="font-sans text-lg text-slate-700 leading-relaxed mb-6 font-normal"
@@ -152,7 +144,7 @@ function openGalleria(index) {
             :href="store.project.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-marigold pb-0.5 hover:text-slate-800 transition-colors"
             :aria-label="`Ver proyecto ${store.project.title}`"
           >
             Ver proyecto →

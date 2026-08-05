@@ -5,6 +5,11 @@
 @theme {
   --font-serif: 'DM Serif Display', Georgia, serif;
   --font-sans: 'DM Sans', system-ui, sans-serif;
+
+  --color-blush: #fbddd5;
+  --color-butter: #f7db88;
+  --color-marigold: #e99734;
+  --color-periwinkle: #84a4f1;
 }
 
 .rich-text p {

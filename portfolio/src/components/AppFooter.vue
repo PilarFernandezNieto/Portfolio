@@ -9,7 +9,7 @@
       <a
         href="/CV_PilarFernandezNieto.pdf"
         download
-        class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors flex items-center gap-2"
+        class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors flex items-center gap-2"
         aria-label="Descargar CV en PDF"
       >
         <span>↓</span> Descargar CV

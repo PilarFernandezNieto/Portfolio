@@ -132,7 +132,7 @@ async function handleSubmit() {
 <template>
   <div class="max-w-2xl">
     <header class="mb-10">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-2">
+      <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-2">
         {{ isEditing ? 'Editar proyecto' : 'Nuevo proyecto' }}
       </p>
       <h1 class="font-serif text-3xl text-slate-800 font-normal">
@@ -161,7 +161,7 @@ async function handleSubmit() {
           v-model="form.title"
           type="text"
           required
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors"
         />
       </div>
 
@@ -180,7 +180,7 @@ async function handleSubmit() {
           v-model="form.intro"
           rows="3"
           maxlength="500"
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors resize-none"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors resize-none"
         />
       </div>
 
@@ -206,7 +206,7 @@ async function handleSubmit() {
           id="url"
           v-model="form.url"
           type="url"
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors"
         />
       </div>
 
@@ -223,7 +223,7 @@ async function handleSubmit() {
           type="text"
           placeholder="PHP, Laravel, Vue.js"
           required
-          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
+          class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors"
         />
       </div>
 
@@ -240,7 +240,7 @@ async function handleSubmit() {
             v-model="form.order"
             type="number"
             min="0"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors"
           />
         </div>
 
@@ -253,7 +253,7 @@ async function handleSubmit() {
               id="visible"
               v-model="form.visible"
               type="checkbox"
-              class="w-4 h-4 accent-slate-800"
+              class="w-4 h-4 accent-marigold"
             />
             <label for="visible" class="font-sans text-sm text-slate-600">
               Mostrar en el portfolio
@@ -288,13 +288,13 @@ async function handleSubmit() {
         <button
           type="submit"
           :disabled="store.loading"
-          class="font-sans text-xs tracking-widest uppercase text-white bg-slate-800 px-6 py-3 rounded hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-6 py-3 rounded hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{ isEditing ? 'Guardar cambios' : 'Crear proyecto' }}
         </button>
         <RouterLink
           :to="{ name: 'admin-projects' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 px-6 py-3 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold px-6 py-3 transition-colors"
         >
           Cancelar
         </RouterLink>
@@ -347,7 +347,7 @@ async function handleSubmit() {
         :class="{ 'opacity-50 cursor-not-allowed pointer-events-none': uploadingImages }"
       >
         <span
-          class="font-sans text-xs tracking-widest uppercase text-slate-600 border border-stone-200 rounded px-4 py-2 hover:border-slate-500 hover:text-slate-800 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 border border-stone-200 rounded px-4 py-2 hover:border-marigold hover:text-slate-800 transition-colors"
         >
           {{ uploadingImages ? 'Subiendo…' : '+ Añadir capturas' }}
         </span>

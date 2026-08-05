@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import api from '@/services/api'
+import SectionTag from '@/components/SectionTag.vue'
+import BackgroundBlob from '@/components/BackgroundBlob.vue'
 
 const form = ref({ name: '', email: '', message: '' })
 const loading = ref(false)
@@ -23,97 +25,92 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto px-6 py-24">
-    <header class="border-b border-stone-200 pb-12 mb-12">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
-        Contacto
+  <div class="relative overflow-hidden max-w-5xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+    <BackgroundBlob color="#F7DB88" size="300px" top="-6rem" left="-8rem" :opacity="0.4" />
+
+    <header>
+      <SectionTag label="Contacto" class="mb-4" />
+      <h1 class="font-serif text-4xl text-slate-800 font-normal mb-6">Hablemos</h1>
+      <p class="font-sans text-base text-slate-600 leading-relaxed">
+        ¿Tienes un proyecto en mente o quieres charlar sobre alguna colaboración? Cuéntame en qué
+        andas y te responderé lo antes posible.
       </p>
-      <h1 class="font-serif text-4xl text-slate-800 font-normal">Hablemos</h1>
     </header>
 
-    <div class="grid md:grid-cols-3 gap-12 md:gap-16">
-      <div>
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
-          Mensaje
-        </p>
-        <div class="w-10 h-0.5 bg-slate-300"></div>
+    <div class="bg-white border border-stone-200 rounded-2xl shadow-sm p-8">
+      <div
+        v-if="success"
+        role="status"
+        class="font-sans text-sm text-green-700 bg-green-50 border border-green-200 rounded px-5 py-4"
+      >
+        Mensaje enviado. Me pondré en contacto contigo pronto.
       </div>
 
-      <div class="md:col-span-2">
-        <div
-          v-if="success"
-          role="status"
-          class="font-sans text-sm text-green-700 bg-green-50 border border-green-200 rounded px-5 py-4 mb-8"
-        >
-          Mensaje enviado. Me pondré en contacto contigo pronto.
+      <form v-if="!success" @submit.prevent="handleSubmit" class="flex flex-col gap-6" novalidate>
+        <div class="flex flex-col gap-2">
+          <label
+            for="name"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
+          >
+            Nombre
+          </label>
+          <input
+            id="name"
+            v-model="form.name"
+            type="text"
+            required
+            autocomplete="name"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-periwinkle transition-colors"
+          />
         </div>
 
-        <form v-if="!success" @submit.prevent="handleSubmit" class="flex flex-col gap-6" novalidate>
-          <div class="flex flex-col gap-2">
-            <label
-              for="name"
-              class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-            >
-              Nombre
-            </label>
-            <input
-              id="name"
-              v-model="form.name"
-              type="text"
-              required
-              autocomplete="name"
-              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
-            />
-          </div>
+        <div class="flex flex-col gap-2">
+          <label
+            for="email"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            v-model="form.email"
+            type="email"
+            required
+            autocomplete="email"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-periwinkle transition-colors"
+          />
+        </div>
 
-          <div class="flex flex-col gap-2">
-            <label
-              for="email"
-              class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              v-model="form.email"
-              type="email"
-              required
-              autocomplete="email"
-              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
-            />
-          </div>
+        <div class="flex flex-col gap-2">
+          <label
+            for="message"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
+          >
+            Mensaje
+          </label>
+          <textarea
+            id="message"
+            v-model="form.message"
+            rows="6"
+            required
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-periwinkle transition-colors resize-none"
+          />
+        </div>
 
-          <div class="flex flex-col gap-2">
-            <label
-              for="message"
-              class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-            >
-              Mensaje
-            </label>
-            <textarea
-              id="message"
-              v-model="form.message"
-              rows="6"
-              required
-              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors resize-none"
-            />
-          </div>
+        <div v-if="error" role="alert" class="font-sans text-sm text-red-500">
+          {{ error }}
+        </div>
 
-          <div v-if="error" role="alert" class="font-sans text-sm text-red-500">
-            {{ error }}
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              :disabled="loading"
-              class="font-sans text-xs tracking-widest uppercase text-white bg-slate-800 px-6 py-3 rounded hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {{ loading ? 'Enviando…' : 'Enviar mensaje' }}
-            </button>
-          </div>
-        </form>
-      </div>
+        <div>
+          <button
+            type="submit"
+            :disabled="loading"
+            class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-6 py-3 rounded hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {{ loading ? 'Enviando…' : 'Enviar mensaje' }}
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>

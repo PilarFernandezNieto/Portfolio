@@ -43,7 +43,7 @@ async function handleSubmit() {
 <template>
   <div class="max-w-2xl">
     <header class="mb-10">
-      <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-2">
+      <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-2">
         Administración
       </p>
       <h1 class="font-serif text-3xl text-slate-800 font-normal">Sobre mí</h1>
@@ -84,7 +84,7 @@ async function handleSubmit() {
           <button
             type="button"
             @click="addDetail"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
           >
             + Añadir
           </button>
@@ -95,13 +95,13 @@ async function handleSubmit() {
             v-model="detail.label"
             type="text"
             placeholder="Etiqueta"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors flex-1"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors flex-1"
           />
           <input
             v-model="detail.value"
             type="text"
             placeholder="Valor"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors flex-1"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors flex-1"
           />
           <button
             type="button"
@@ -118,7 +118,7 @@ async function handleSubmit() {
         <button
           type="submit"
           :disabled="store.loading"
-          class="font-sans text-xs tracking-widest uppercase text-white bg-slate-800 px-6 py-3 rounded hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-6 py-3 rounded hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Guardar cambios
         </button>

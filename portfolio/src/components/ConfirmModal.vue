@@ -27,7 +27,7 @@ const { accept, cancel } = useConfirm()
         <div class="flex justify-end gap-3">
           <button
             @click="cancel"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 px-5 py-3 rounded border border-stone-200 hover:border-slate-500 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 px-5 py-3 rounded border border-stone-200 hover:border-marigold transition-colors"
           >
             Cancelar
           </button>

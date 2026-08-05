@@ -32,14 +32,14 @@ async function handleDelete(id) {
   <div>
     <header class="flex justify-between items-center mb-10">
       <div>
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-2">
+        <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-2">
           Administración
         </p>
         <h1 class="font-serif text-3xl text-slate-800 font-normal">Proyectos</h1>
       </div>
       <RouterLink
         :to="{ name: 'admin-projects-create' }"
-        class="font-sans text-xs tracking-widest uppercase text-white bg-slate-800 px-5 py-3 rounded hover:bg-slate-700 transition-colors"
+        class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-5 py-3 rounded hover:opacity-90 transition-opacity"
       >
         + Nuevo proyecto
       </RouterLink>
@@ -75,7 +75,7 @@ async function handleDelete(id) {
             <span
               v-for="tech in project.technologies"
               :key="tech"
-              class="font-sans text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-sm"
+              class="font-sans text-xs bg-blush/60 text-slate-700 px-2 py-0.5 rounded-sm"
             >
               {{ tech }}
             </span>
@@ -85,7 +85,7 @@ async function handleDelete(id) {
         <div class="flex gap-4 shrink-0 ml-6">
           <RouterLink
             :to="{ name: 'admin-projects-edit', params: { id: project.id } }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
           >
             Editar
           </RouterLink>

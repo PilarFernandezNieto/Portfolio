@@ -30,7 +30,7 @@ async function handleLogin() {
   <div class="min-h-screen bg-stone-50 flex items-center justify-center px-6">
     <div class="w-full max-w-sm">
       <div class="mb-10">
-        <p class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold mb-4">
+        <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-4">
           Panel de administración
         </p>
         <h1 class="font-serif text-4xl text-slate-800 font-normal">Acceder</h1>
@@ -50,7 +50,7 @@ async function handleLogin() {
             type="email"
             autocomplete="email"
             required
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors"
           />
         </div>
 
@@ -67,7 +67,7 @@ async function handleLogin() {
             type="password"
             autocomplete="current-password"
             required
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-slate-500 transition-colors"
+            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors"
           />
         </div>
 
@@ -78,7 +78,7 @@ async function handleLogin() {
         <button
           type="submit"
           :disabled="loading"
-          class="font-sans text-xs tracking-widest uppercase text-white bg-slate-800 px-6 py-3 rounded hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-6 py-3 rounded hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{ loading ? 'Accediendo...' : 'Acceder' }}
         </button>

@@ -6,17 +6,25 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  index: {
+    type: Number,
+    default: 0,
+  },
 })
 
 const imageUrl = computed(() =>
   props.project.image ? `${import.meta.env.VITE_STORAGE_URL}/${props.project.image}` : null,
 )
+
+const accents = ['bg-marigold', 'bg-periwinkle', 'bg-butter']
+const accentClass = computed(() => accents[props.index % accents.length])
 </script>
 
 <template>
   <article
-    class="bg-white border border-stone-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+    class="bg-white border border-stone-200 rounded-lg overflow-hidden hover:shadow-md hover:border-marigold/50 transition-all"
   >
+    <div class="h-1" :class="accentClass" aria-hidden="true" />
     <div class="h-48 bg-slate-800 flex items-center justify-center">
       <img
         v-if="imageUrl"
@@ -24,7 +32,7 @@ const imageUrl = computed(() =>
         :alt="project.title"
         class="w-full h-full object-cover"
       />
-      <span v-else class="font-serif text-slate-500 text-lg">{{ project.title }}</span>
+      <span v-else class="font-serif text-butter text-lg">{{ project.title }}</span>
     </div>
 
     <div class="p-6">
@@ -39,7 +47,7 @@ const imageUrl = computed(() =>
         <li
           v-for="tech in project.technologies"
           :key="tech"
-          class="font-sans text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-sm font-semibold"
+          class="font-sans text-xs bg-blush/60 text-slate-700 px-3 py-1 rounded-sm font-semibold"
         >
           {{ tech }}
         </li>
@@ -48,7 +56,7 @@ const imageUrl = computed(() =>
       <div class="flex flex-wrap gap-4">
         <RouterLink
           :to="{ name: 'project-detail', params: { id: project.id } }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-slate-300 pb-0.5 hover:text-slate-800 hover:border-slate-600 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-marigold pb-0.5 hover:text-slate-800 transition-colors"
           :aria-label="`Ver ficha de ${project.title}`"
         >
           Ver ficha →
@@ -58,7 +66,7 @@ const imageUrl = computed(() =>
           :href="project.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-stone-200 pb-0.5 hover:text-slate-600 hover:border-slate-500 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-periwinkle/60 pb-0.5 hover:text-slate-800 hover:border-periwinkle transition-colors"
           :aria-label="`Abrir ${project.title} en nueva pestaña`"
         >
           Enlace externo ↗

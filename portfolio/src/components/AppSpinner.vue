@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center py-24" role="status" aria-label="Cargando">
     <svg
-      class="w-6 h-6 text-slate-300 animate-spin"
+      class="w-6 h-6 text-marigold animate-spin"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

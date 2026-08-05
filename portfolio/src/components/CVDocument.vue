@@ -1,9 +1,45 @@
-<script setup></script>
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+const viewportRef = ref(null)
+const pageRef = ref(null)
+const scale = ref(1)
+const pageHeight = ref(0)
+let resizeObserver
+
+function updateScale() {
+  if (!viewportRef.value || !pageRef.value) return
+  const available = viewportRef.value.clientWidth
+  const natural = pageRef.value.offsetWidth
+  scale.value = Math.min(1, available / natural)
+  pageHeight.value = pageRef.value.offsetHeight
+}
+
+onMounted(() => {
+  updateScale()
+  resizeObserver = new ResizeObserver(updateScale)
+  resizeObserver.observe(viewportRef.value)
+})
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
+})
+</script>
 
 <template>
-  <div class="cv-page">
+  <div
+    ref="viewportRef"
+    class="cv-viewport"
+    :style="{ height: pageHeight * scale + 'px' }"
+  >
+  <div
+    ref="pageRef"
+    class="cv-page"
+    :style="{ transform: `scale(${scale})` }"
+  >
     <aside class="sidebar">
       <div class="name-block">
+        <span class="monogram" aria-hidden="true">PF</span>
         <h1>Pilar<br />Fernández<br />Nieto</h1>
         <p class="role">Desarrolladora Full-Stack</p>
       </div>
@@ -34,8 +70,8 @@
         <div class="skill-group">
           <div class="skill-group-name">Backend</div>
           <div class="skill-tags">
-            <span class="tag-highlight">PHP</span>
-            <span class="tag-highlight">Laravel</span>
+            <span class="tag">PHP</span>
+            <span class="tag">Laravel</span>
             <span class="tag">APIs REST</span>
             <span class="tag">MySQL</span>
             <span class="tag">Twig / Smarty</span>
@@ -45,8 +81,8 @@
         <div class="skill-group">
           <div class="skill-group-name">Frontend</div>
           <div class="skill-tags">
-            <span class="tag-highlight">Vue.js 3</span>
-            <span class="tag-highlight">Pinia</span>
+            <span class="tag">Vue.js 3</span>
+            <span class="tag">Pinia</span>
             <span class="tag">Vue Router</span>
             <span class="tag">Axios</span>
             <span class="tag">Bootstrap</span>
@@ -209,19 +245,23 @@
       </div>
     </main>
   </div>
+  </div>
 </template>
 
 <style scoped>
 .cv-page {
   box-sizing: border-box;
-  --slate: #2c3e50;
-  --slate-mid: #3d5166;
-  --slate-light: #5b7a99;
-  --accent: #7fb3d3;
-  --bg: #f7f8fa;
-  --text: #1a2530;
-  --text-soft: #4a6070;
-  --rule: #d0dde8;
+  --slate: #1e293b;
+  --slate-mid: #475569;
+  --slate-light: #94a3b8;
+  --marigold: #e99734;
+  --periwinkle: #84a4f1;
+  --butter: #f7db88;
+  --blush: #fbddd5;
+  --bg: #fdeeea;
+  --text: #1e293b;
+  --text-soft: #475569;
+  --rule: #e7e5e4;
 
   font-family: 'DM Sans', sans-serif;
   font-size: 9pt;
@@ -232,8 +272,17 @@
   grid-template-columns: 64mm 1fr;
   width: 210mm;
   min-height: 297mm;
+  flex-shrink: 0;
   background: white;
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+  transform-origin: top center;
+}
+
+.cv-viewport {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .cv-page :deep(*) {
@@ -261,8 +310,22 @@
 }
 
 .name-block {
-  border-bottom: 1px solid var(--slate-light);
+  border-bottom: 1px solid rgba(132, 164, 241, 0.4);
   padding-bottom: 5mm;
+}
+
+.monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 11mm;
+  height: 11mm;
+  border-radius: 2.5mm;
+  background: var(--marigold);
+  color: var(--slate);
+  font-family: 'DM Serif Display', serif;
+  font-size: 12pt;
+  margin-bottom: 4mm;
 }
 
 .name-block h1 {
@@ -276,7 +339,7 @@
 .role {
   font-size: 7pt;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--periwinkle);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -297,7 +360,7 @@
 }
 
 .contact-item .icon {
-  color: var(--accent);
+  color: var(--marigold);
   flex-shrink: 0;
 }
 .contact-item a {
@@ -317,11 +380,11 @@
 .sidebar-label {
   font-size: 6.5pt;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--butter);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding-bottom: 1.5mm;
-  border-bottom: 1px solid var(--slate-light);
+  border-bottom: 1px solid rgba(247, 219, 136, 0.3);
 }
 
 .skill-group {
@@ -343,9 +406,9 @@
 
 .tag {
   display: inline-block;
-  background: rgba(127, 179, 211, 0.15);
-  border: 1px solid rgba(127, 179, 211, 0.3);
-  color: rgba(255, 255, 255, 0.82);
+  background: rgba(132, 164, 241, 0.28);
+  border: 1px solid rgba(132, 164, 241, 0.55);
+  color: white;
   font-size: 7.8pt;
   padding: 0.8mm 2mm;
   border-radius: 2px;
@@ -354,11 +417,11 @@
 
 .tag-highlight {
   display: inline-block;
-  background: rgba(127, 179, 211, 0.28);
-  border: 1px solid rgba(127, 179, 211, 0.55);
-  color: white;
+  background: var(--marigold);
+  border: 1px solid var(--marigold);
+  color: var(--slate);
   font-size: 7.8pt;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.8mm 2mm;
   border-radius: 2px;
   line-height: 1.3;
@@ -369,7 +432,7 @@
   color: rgba(255, 255, 255, 0.82);
 }
 .lang-item span {
-  color: var(--accent);
+  color: var(--periwinkle);
   font-weight: 600;
 }
 
@@ -384,7 +447,7 @@
   content: '—';
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--butter);
 }
 
 /* ── MAIN ── */
@@ -398,7 +461,7 @@
 
 .summary-block {
   background: var(--bg);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--periwinkle);
   padding: 3mm 4mm;
   font-size: 9pt;
   color: var(--text-soft);
@@ -418,13 +481,29 @@
 }
 
 .section-title {
+  display: inline-block;
+  align-self: flex-start;
   font-size: 6.5pt;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--slate-light);
-  padding-bottom: 1.5mm;
-  border-bottom: 1.5px solid var(--rule);
+  color: var(--slate);
+  padding: 1mm 2.5mm;
+  border-radius: 2px;
+  background: var(--rule);
+}
+
+.section:nth-of-type(1) .section-title {
+  background: var(--periwinkle);
+  color: white;
+}
+.section:nth-of-type(2) .section-title {
+  background: var(--marigold);
+  color: white;
+}
+.section:nth-of-type(3) .section-title {
+  background: var(--butter);
+  color: var(--slate);
 }
 
 .entry {
@@ -455,11 +534,11 @@
 
 .entry-date {
   font-size: 7.8pt;
-  color: var(--slate-light);
-  font-weight: 500;
+  color: var(--slate);
+  font-weight: 700;
   white-space: nowrap;
-  background: var(--bg);
-  padding: 0.6mm 1.8mm;
+  background: var(--butter);
+  padding: 0.8mm 2.5mm;
   border-radius: 2px;
   flex-shrink: 0;
 }
@@ -486,7 +565,7 @@
 }
 
 .bullet-list li::marker {
-  color: var(--accent);
+  color: var(--marigold);
   font-size: 10pt;
 }
 

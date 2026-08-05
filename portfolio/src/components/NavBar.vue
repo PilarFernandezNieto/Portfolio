@@ -27,9 +27,15 @@ const links = [
     >
       <RouterLink
         to="/"
-        class="font-serif text-slate-800 text-base tracking-wide hover:text-slate-600 transition-colors"
+        class="flex items-center gap-2.5 font-serif text-slate-800 text-base tracking-wide hover:text-slate-600 transition-colors"
         aria-label="Ir al inicio"
       >
+        <span
+          class="w-7 h-7 rounded-md bg-marigold text-slate-900 flex items-center justify-center font-serif text-sm"
+          aria-hidden="true"
+        >
+          P
+        </span>
         Pilar Fernández Nieto
       </RouterLink>
 
@@ -55,8 +61,8 @@ const links = [
         <li v-for="link in links" :key="link.to">
           <RouterLink
             :to="{ name: link.name }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
-            :class="{ 'text-slate-800 font-semibold': route.name === link.name }"
+            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
+            :class="{ 'text-marigold font-semibold': route.name === link.name }"
           >
             {{ link.label }}
           </RouterLink>
@@ -64,7 +70,7 @@ const links = [
         <li v-if="auth.isAuthenticated">
           <RouterLink
             :to="{ name: 'admin' }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 border border-stone-300 px-3 py-1.5 rounded hover:text-slate-700 hover:border-slate-500 transition-colors"
+            class="font-sans text-xs tracking-widest uppercase text-slate-500 border border-stone-300 px-3 py-1.5 rounded hover:text-periwinkle hover:border-periwinkle transition-colors"
           >
             Admin
           </RouterLink>
@@ -79,8 +85,8 @@ const links = [
       <li v-for="link in links" :key="link.to">
         <RouterLink
           :to="{ name: link.name }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-slate-800 transition-colors"
-          :class="{ 'text-slate-800 font-semibold': route.name === link.name }"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
+          :class="{ 'text-marigold font-semibold': route.name === link.name }"
           @click="menuOpen = false"
         >
           {{ link.label }}
@@ -89,7 +95,7 @@ const links = [
       <li v-if="auth.isAuthenticated">
         <RouterLink
           :to="{ name: 'admin' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-slate-700 transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-periwinkle transition-colors"
           @click="menuOpen = false"
         >
           Admin
