@@ -30,7 +30,7 @@ async function handleDelete(id) {
 
 <template>
   <div>
-    <header class="flex justify-between items-center mb-10">
+    <header class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-10">
       <div>
         <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-2">
           Administración
@@ -39,7 +39,7 @@ async function handleDelete(id) {
       </div>
       <RouterLink
         :to="{ name: 'admin-projects-create' }"
-        class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-5 py-3 rounded hover:opacity-90 transition-opacity"
+        class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-5 py-3 rounded hover:opacity-90 transition-opacity text-center sm:self-auto self-start"
       >
         + Nuevo proyecto
       </RouterLink>
@@ -67,7 +67,7 @@ async function handleDelete(id) {
       <div
         v-for="project in store.projects"
         :key="project.id"
-        class="bg-white border border-stone-200 rounded-lg px-6 py-4 flex justify-between items-center"
+        class="bg-white border border-stone-200 rounded-lg px-6 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4"
       >
         <div>
           <p class="font-serif text-lg text-slate-800">{{ project.title }}</p>
@@ -82,7 +82,7 @@ async function handleDelete(id) {
           </div>
         </div>
 
-        <div class="flex gap-4 shrink-0 ml-6">
+        <div class="flex gap-4 shrink-0 sm:ml-6">
           <RouterLink
             :to="{ name: 'admin-projects-edit', params: { id: project.id } }"
             class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"

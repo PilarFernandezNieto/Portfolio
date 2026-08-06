@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import api from '@/services/api'
 import SectionTag from '@/components/SectionTag.vue'
 import BackgroundBlob from '@/components/BackgroundBlob.vue'
+import FormLabel from '@/components/FormLabel.vue'
 
 const form = ref({ name: '', email: '', message: '' })
 const loading = ref(false)
@@ -48,12 +49,7 @@ async function handleSubmit() {
 
       <form v-if="!success" @submit.prevent="handleSubmit" class="flex flex-col gap-6" novalidate>
         <div class="flex flex-col gap-2">
-          <label
-            for="name"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-          >
-            Nombre
-          </label>
+          <FormLabel for="name">Nombre</FormLabel>
           <input
             id="name"
             v-model="form.name"
@@ -65,12 +61,7 @@ async function handleSubmit() {
         </div>
 
         <div class="flex flex-col gap-2">
-          <label
-            for="email"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-          >
-            Email
-          </label>
+          <FormLabel for="email">Email</FormLabel>
           <input
             id="email"
             v-model="form.email"
@@ -82,12 +73,7 @@ async function handleSubmit() {
         </div>
 
         <div class="flex flex-col gap-2">
-          <label
-            for="message"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-          >
-            Mensaje
-          </label>
+          <FormLabel for="message">Mensaje</FormLabel>
           <textarea
             id="message"
             v-model="form.message"

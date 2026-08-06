@@ -66,7 +66,7 @@ const accentClass = computed(() => accents[props.index % accents.length])
           :href="project.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 border-b-2 border-periwinkle/60 pb-0.5 hover:text-slate-800 hover:border-periwinkle transition-colors"
+          class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-periwinkle/60 pb-0.5 hover:text-slate-800 hover:border-periwinkle transition-colors"
           :aria-label="`Abrir ${project.title} en nueva pestaña`"
         >
           Enlace externo ↗

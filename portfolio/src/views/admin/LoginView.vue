@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import FormLabel from '@/components/FormLabel.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -38,12 +39,7 @@ async function handleLogin() {
 
       <form @submit.prevent="handleLogin" class="flex flex-col gap-6" novalidate>
         <div class="flex flex-col gap-2">
-          <label
-            for="email"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-          >
-            Email
-          </label>
+          <FormLabel for="email">Email</FormLabel>
           <input
             id="email"
             v-model="credentials.email"
@@ -55,12 +51,7 @@ async function handleLogin() {
         </div>
 
         <div class="flex flex-col gap-2">
-          <label
-            for="password"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-          >
-            Contraseña
-          </label>
+          <FormLabel for="password">Contraseña</FormLabel>
           <input
             id="password"
             v-model="credentials.password"

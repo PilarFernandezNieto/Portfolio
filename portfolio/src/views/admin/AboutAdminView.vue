@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAboutStore } from '@/stores/about'
 import RichTextEditor from '@/components/RichTextEditor.vue'
+import FormLabel from '@/components/FormLabel.vue'
 
 const store = useAboutStore()
 const successMessage = ref(null)
@@ -67,20 +68,13 @@ async function handleSubmit() {
 
     <form @submit.prevent="handleSubmit" class="flex flex-col gap-6" novalidate>
       <div class="flex flex-col gap-2">
-        <label
-          for="bio"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
-          Biografía
-        </label>
+        <FormLabel for="bio">Biografía</FormLabel>
         <RichTextEditor v-model="form.bio" />
       </div>
 
       <div class="flex flex-col gap-4">
         <div class="flex justify-between items-center">
-          <label class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold">
-            Detalles
-          </label>
+          <FormLabel>Detalles</FormLabel>
           <button
             type="button"
             @click="addDetail"
@@ -90,27 +84,33 @@ async function handleSubmit() {
           </button>
         </div>
 
-        <div v-for="(detail, index) in form.details" :key="index" class="flex gap-4 items-center">
+        <div
+          v-for="(detail, index) in form.details"
+          :key="index"
+          class="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center"
+        >
           <input
             v-model="detail.label"
             type="text"
             placeholder="Etiqueta"
             class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors flex-1"
           />
-          <input
-            v-model="detail.value"
-            type="text"
-            placeholder="Valor"
-            class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors flex-1"
-          />
-          <button
-            type="button"
-            @click="removeDetail(index)"
-            class="font-sans text-xs text-red-400 hover:text-red-600 transition-colors shrink-0"
-            aria-label="Eliminar detalle"
-          >
-            ✕
-          </button>
+          <div class="flex gap-4 items-center">
+            <input
+              v-model="detail.value"
+              type="text"
+              placeholder="Valor"
+              class="font-sans text-sm text-slate-800 bg-white border border-stone-200 rounded px-4 py-3 focus:outline-none focus:border-marigold transition-colors flex-1"
+            />
+            <button
+              type="button"
+              @click="removeDetail(index)"
+              class="font-sans text-xs text-red-400 hover:text-red-600 transition-colors shrink-0"
+              aria-label="Eliminar detalle"
+            >
+              ✕
+            </button>
+          </div>
         </div>
       </div>
 

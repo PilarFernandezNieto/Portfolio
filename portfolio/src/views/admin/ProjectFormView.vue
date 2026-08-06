@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
 import RichTextEditor from '@/components/RichTextEditor.vue'
+import FormLabel from '@/components/FormLabel.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -150,12 +151,7 @@ async function handleSubmit() {
 
     <form @submit.prevent="handleSubmit" class="flex flex-col gap-6" novalidate>
       <div class="flex flex-col gap-2">
-        <label
-          for="title"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
-          Título
-        </label>
+        <FormLabel for="title">Título</FormLabel>
         <input
           id="title"
           v-model="form.title"
@@ -166,15 +162,12 @@ async function handleSubmit() {
       </div>
 
       <div class="flex flex-col gap-2">
-        <label
-          for="intro"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
+        <FormLabel for="intro">
           Intro
           <span class="normal-case text-slate-300"
             >(resumen breve para el listado, máx. 500 caracteres)</span
           >
-        </label>
+        </FormLabel>
         <textarea
           id="intro"
           v-model="form.intro"
@@ -185,23 +178,15 @@ async function handleSubmit() {
       </div>
 
       <div class="flex flex-col gap-2">
-        <label
-          for="description"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
+        <FormLabel for="description">
           Descripción
           <span class="normal-case text-slate-300">(texto completo en la ficha del proyecto)</span>
-        </label>
+        </FormLabel>
         <RichTextEditor v-model="form.description" />
       </div>
 
       <div class="flex flex-col gap-2">
-        <label
-          for="url"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
-          URL externa
-        </label>
+        <FormLabel for="url">URL externa</FormLabel>
         <input
           id="url"
           v-model="form.url"
@@ -211,12 +196,9 @@ async function handleSubmit() {
       </div>
 
       <div class="flex flex-col gap-2">
-        <label
-          for="technologies"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
+        <FormLabel for="technologies">
           Tecnologías <span class="normal-case text-slate-300">(separadas por comas)</span>
-        </label>
+        </FormLabel>
         <input
           id="technologies"
           v-model="form.technologies"
@@ -227,14 +209,9 @@ async function handleSubmit() {
         />
       </div>
 
-      <div class="flex gap-6">
+      <div class="flex flex-col sm:flex-row gap-6">
         <div class="flex flex-col gap-2 flex-1">
-          <label
-            for="order"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-          >
-            Orden
-          </label>
+          <FormLabel for="order">Orden</FormLabel>
           <input
             id="order"
             v-model="form.order"
@@ -245,9 +222,7 @@ async function handleSubmit() {
         </div>
 
         <div class="flex flex-col gap-2 justify-end pb-1">
-          <label class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold">
-            Visible
-          </label>
+          <FormLabel>Visible</FormLabel>
           <div class="flex items-center gap-3 px-4 py-3">
             <input
               id="visible"
@@ -263,12 +238,9 @@ async function handleSubmit() {
       </div>
 
       <div class="flex flex-col gap-2">
-        <label
-          for="image"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
-        >
+        <FormLabel for="image">
           Portada <span class="normal-case text-slate-300">(imagen del listado)</span>
-        </label>
+        </FormLabel>
         <div
           v-if="imagePreview"
           class="w-full h-48 rounded overflow-hidden mb-2 border border-stone-200"
@@ -284,7 +256,7 @@ async function handleSubmit() {
         />
       </div>
 
-      <div class="flex gap-4 pt-4">
+      <div class="flex flex-col sm:flex-row gap-4 pt-4">
         <button
           type="submit"
           :disabled="store.loading"
@@ -312,7 +284,7 @@ async function handleSubmit() {
         </p>
       </div>
 
-      <div v-if="gallery.length > 0" class="grid grid-cols-2 gap-3 mb-4">
+      <div v-if="gallery.length > 0" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
         <div
           v-for="(img, index) in gallery"
           :key="img.id"
