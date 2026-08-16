@@ -4,6 +4,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
 import RichTextEditor from '@/components/RichTextEditor.vue'
 import FormLabel from '@/components/FormLabel.vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -242,19 +243,12 @@ async function handleSubmit() {
       </div>
 
       <div class="flex flex-wrap gap-4 pt-2">
-        <button
-          type="submit"
-          :disabled="store.loading"
-          class="bg-ink border border-ink text-cream font-sans text-[13px] font-bold tracking-widest uppercase px-7 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-        >
+        <ButtonDark type="submit" :disabled="store.loading" size="lg">
           {{ isEditing ? 'Guardar cambios' : 'Crear proyecto' }}
-        </button>
-        <RouterLink
-          :to="{ name: 'admin-projects' }"
-          class="border border-ink text-ink font-sans text-[13px] font-bold tracking-widest uppercase px-7 py-3.5 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-        >
+        </ButtonDark>
+        <ButtonDark :to="{ name: 'admin-projects' }" variant="outline" size="lg">
           Cancelar
-        </RouterLink>
+        </ButtonDark>
       </div>
     </form>
 

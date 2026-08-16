@@ -1,5 +1,6 @@
 <script setup>
 import { useConfirm, useConfirmState } from '@/composables/useConfirm'
+import ButtonDark from '@/components/ButtonDark.vue'
 
 const { visible, title, message } = useConfirmState()
 const { accept, cancel } = useConfirm()
@@ -31,12 +32,7 @@ const { accept, cancel } = useConfirm()
           >
             Eliminar
           </button>
-          <button
-            @click="cancel"
-            class="text-ink font-sans text-[13px] font-bold tracking-widest uppercase border border-ink px-6 py-3 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
-          >
-            Cancelar
-          </button>
+          <ButtonDark type="button" @click="cancel" variant="outline">Cancelar</ButtonDark>
         </div>
       </div>
     </div>

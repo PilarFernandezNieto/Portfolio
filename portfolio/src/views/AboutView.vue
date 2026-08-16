@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue'
 import { useAboutStore } from '@/stores/about'
 import AppSpinner from '@/components/AppSpinner.vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 import DOMPurify from 'dompurify'
 
 const aboutStore = useAboutStore()
@@ -57,13 +58,9 @@ onMounted(() => {
             class="rich-text font-sans text-[17px] leading-relaxed text-ink/85 max-w-145 mb-7"
             v-html="sanitizedBio"
           />
-          <a
-            href="/CV_PilarFernandezNieto.pdf"
-            download
-            class="inline-block border border-ink text-ink px-6 py-3 font-sans font-bold text-[13px] uppercase tracking-widest focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-          >
+          <ButtonDark href="/CV_PilarFernandezNieto.pdf" download variant="outline">
             Descargar CV
-          </a>
+          </ButtonDark>
         </div>
       </section>
 

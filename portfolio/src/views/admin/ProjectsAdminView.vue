@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useProjectsStore } from '@/stores/projects'
 import { useConfirm } from '@/composables/useConfirm'
 import AppSpinner from '@/components/AppSpinner.vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 
 const store = useProjectsStore()
 const successMessage = ref(null)
@@ -39,12 +40,9 @@ async function handleDelete(id) {
           Proyectos
         </h1>
       </div>
-      <RouterLink
-        :to="{ name: 'admin-projects-create' }"
-        class="font-sans text-[13px] font-bold tracking-widest uppercase text-ink border border-ink px-6 py-3 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-      >
+      <ButtonDark :to="{ name: 'admin-projects-create' }" variant="outline">
         Añadir proyecto
-      </RouterLink>
+      </ButtonDark>
     </header>
 
     <div

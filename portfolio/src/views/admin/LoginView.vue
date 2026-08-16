@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import FormLabel from '@/components/FormLabel.vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -82,13 +83,9 @@ async function handleLogin() {
           {{ auth.error }}
         </div>
 
-        <button
-          type="submit"
-          :disabled="loading"
-          class="w-full bg-ink border border-ink text-cream py-4 font-sans font-bold text-sm uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-        >
+        <ButtonDark type="submit" :disabled="loading" size="lg" class="w-full">
           {{ loading ? 'Accediendo…' : 'Entrar' }}
-        </button>
+        </ButtonDark>
       </form>
     </div>
   </div>

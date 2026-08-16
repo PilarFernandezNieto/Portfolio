@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import ButtonDark from '@/components/ButtonDark.vue'
 </script>
 
 <template>
@@ -17,11 +17,6 @@ import { RouterLink } from 'vue-router'
     <p class="font-sans text-base leading-relaxed text-ink/80 mb-8 max-w-md">
       La página que buscas no existe o se ha movido.
     </p>
-    <RouterLink
-      to="/"
-      class="text-ink font-sans text-[13px] font-bold tracking-widest uppercase border border-ink px-7 py-3.5 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-    >
-      Volver al inicio
-    </RouterLink>
+    <ButtonDark to="/" variant="outline" size="lg">Volver al inicio</ButtonDark>
   </div>
 </template>

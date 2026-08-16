@@ -1,4 +1,6 @@
 <script setup>
+import ButtonDark from '@/components/ButtonDark.vue'
+
 const experience = [
   {
     period: 'Ene 2024 — Actualidad',
@@ -94,13 +96,9 @@ const softSkills = [
         </p>
       </div>
       <div class="flex-[1_1_220px] flex flex-col gap-3 items-start">
-        <a
-          href="/CV_PilarFernandezNieto.pdf"
-          download
-          class="text-ink font-sans text-[13px] font-bold tracking-widest uppercase border border-ink px-7 py-3.5 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-        >
+        <ButtonDark href="/CV_PilarFernandezNieto.pdf" download variant="outline" size="lg">
           Descargar CV
-        </a>
+        </ButtonDark>
         <div class="font-sans text-sm leading-relaxed text-ink/80">
           <div>pilarfnieto@gmail.com</div>
           <div>+34 626 34 01 44</div>

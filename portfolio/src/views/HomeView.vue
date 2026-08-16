@@ -1,4 +1,6 @@
 <script setup>
+import ButtonLight from '@/components/ButtonLight.vue'
+
 const focusAreas = [
   'Desarrollo full-stack con Laravel + Vue.js',
   'Interfaces accesibles y cuidadas',
@@ -26,19 +28,10 @@ const focusAreas = [
         Mi objetivo es crear productos funcionales, escalables y fáciles de utilizar.
       </p>
       <div class="flex flex-wrap gap-3.5 justify-center md:justify-start">
-        <RouterLink
-          to="/proyectos"
-          class="bg-cream border border-cream text-ink px-6.5 py-3 font-bold text-[13px] uppercase tracking-[0.08em] focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-[3px]"
-        >
-          Ver proyectos
-        </RouterLink>
-        <a
-          href="/CV_PilarFernandezNieto.pdf"
-          download
-          class="border border-cream text-cream px-6.5 py-3 font-bold text-[13px] uppercase tracking-[0.08em] focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-[3px]"
-        >
+        <ButtonLight to="/proyectos">Ver proyectos</ButtonLight>
+        <ButtonLight href="/CV_PilarFernandezNieto.pdf" download variant="outline">
           Descargar CV
-        </a>
+        </ButtonLight>
       </div>
     </div>
     <div

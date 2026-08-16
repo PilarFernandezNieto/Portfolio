@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useAboutStore } from '@/stores/about'
 import RichTextEditor from '@/components/RichTextEditor.vue'
 import FormLabel from '@/components/FormLabel.vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 
 const store = useAboutStore()
 const successMessage = ref(null)
@@ -67,13 +68,9 @@ async function handleSubmit() {
       <div class="flex flex-col gap-4">
         <div class="flex justify-between items-center">
           <FormLabel>Detalles</FormLabel>
-          <button
-            type="button"
-            @click="addDetail"
-            class="font-sans text-xs font-bold tracking-widest uppercase text-ink border border-ink px-5 py-2.5 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
-          >
+          <ButtonDark type="button" @click="addDetail" variant="outline" size="sm">
             + Añadir
-          </button>
+          </ButtonDark>
         </div>
 
         <div
@@ -107,13 +104,9 @@ async function handleSubmit() {
       </div>
 
       <div class="pt-2">
-        <button
-          type="submit"
-          :disabled="store.loading"
-          class="bg-ink border border-ink text-cream font-sans text-[13px] font-bold tracking-widest uppercase px-7 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-        >
+        <ButtonDark type="submit" :disabled="store.loading" size="lg">
           Guardar cambios
-        </button>
+        </ButtonDark>
       </div>
     </form>
   </div>

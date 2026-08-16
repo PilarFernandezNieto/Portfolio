@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects'
 import AppSpinner from '@/components/AppSpinner.vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 import Galleria from 'primevue/galleria'
 import DOMPurify from 'dompurify'
 
@@ -56,22 +57,24 @@ const galleriaPt = {
 
     <template v-else-if="store.project">
       <header class="pt-16 md:pt-24 pb-8 md:pb-12 border-b border-ink">
-        <div class="flex flex-wrap gap-8 justify-between items-end">
-          <div class="flex-[2_1_480px]">
-            <RouterLink
-              :to="{ name: 'projects' }"
-              class="font-sans text-xs font-bold tracking-widest uppercase text-muted mb-4 inline-block hover:text-ink transition-colors"
-            >
-              ← Proyectos
-            </RouterLink>
-            <h1
-              class="heading heading-1 mb-5"
-            >
+        <div class="flex flex-wrap gap-14 justify-between">
+          <div class="flex-[2_1_500px]">
+            <h1 class="heading heading-1 mb-5">
               {{ store.project.title }}
             </h1>
-            <p v-if="store.project.intro" class="font-sans text-[17px] leading-relaxed text-ink/85 max-w-2xl">
+            <p
+              v-if="store.project.intro"
+              class="font-sans text-[17px] leading-relaxed text-ink/85 max-w-2xl"
+            >
               {{ store.project.intro }}
             </p>
+
+            <section class="mt-8">
+              <div
+                class="rich-text font-sans text-base text-ink/85 leading-relaxed max-w-2xl"
+                v-html="sanitizedDescription"
+              />
+            </section>
           </div>
           <div class="flex-[1_1_220px] flex flex-col gap-5">
             <div v-if="store.project.technologies?.length">
@@ -88,16 +91,20 @@ const galleriaPt = {
                 </li>
               </ul>
             </div>
-            <a
-              v-if="store.project.url"
-              :href="store.project.url"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="w-fit text-ink font-sans text-[13px] font-bold tracking-widest uppercase border border-ink px-6 py-3 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
-              :aria-label="`Ver proyecto ${store.project.title}`"
-            >
-              Ver sitio
-            </a>
+            <div class="flex gap-4">
+              <ButtonDark
+                v-if="store.project.url"
+                :href="store.project.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outline"
+                class="w-fit"
+                :aria-label="`Ver proyecto ${store.project.title}`"
+              >
+                Ver sitio
+              </ButtonDark>
+              <ButtonDark :to="{ name: 'projects' }">Volver</ButtonDark>
+            </div>
           </div>
         </div>
       </header>
@@ -155,14 +162,6 @@ const galleriaPt = {
           class="w-full border border-ink object-cover"
         />
       </div>
-
-      <section class="pb-16 md:pb-24">
-        <h2 class="heading heading-2 mb-6">Descripción</h2>
-        <div
-          class="rich-text font-sans text-base text-ink/85 leading-relaxed max-w-2xl"
-          v-html="sanitizedDescription"
-        />
-      </section>
     </template>
   </div>
 </template>

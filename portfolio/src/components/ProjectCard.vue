@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import ButtonDark from '@/components/ButtonDark.vue'
 
 const props = defineProps({
   project: {
@@ -69,19 +70,21 @@ const displayIndex = computed(() => String(props.index + 1).padStart(2, '0'))
     </div>
 
     <div class="flex-[0_0_auto] flex flex-col gap-3 items-start">
-      <RouterLink
+      <ButtonDark
         :to="{ name: 'project-detail', params: { id: project.id } }"
-        class="text-ink font-sans text-[13px] font-bold tracking-widest uppercase border border-ink px-5.5 py-2.5 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
+        variant="outline"
+        size="sm"
+        class="whitespace-nowrap"
         :aria-label="`Ver ficha de ${project.title}`"
       >
         Ver ficha
-      </RouterLink>
+      </ButtonDark>
       <a
         v-if="project.url"
         :href="project.url"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-ink font-sans text-[13px] font-bold tracking-widest uppercase px-5.5 py-2.5 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
+        class="text-ink font-sans text-[13px] font-bold tracking-widest uppercase px-5.5 py-2.5 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px] transition-transform duration-200 hover:scale-110"
         :aria-label="`Abrir ${project.title} en nueva pestaña`"
       >
         Ver sitio ↗
