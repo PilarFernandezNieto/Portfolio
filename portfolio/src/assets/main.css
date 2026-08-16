@@ -1,15 +1,46 @@
 @import 'tailwindcss';
 
-@import 'tailwindcss';
-
 @theme {
-  --font-serif: 'DM Serif Display', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Bodoni Moda', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 
-  --color-blush: #fbddd5;
-  --color-butter: #f7db88;
-  --color-marigold: #e99734;
-  --color-periwinkle: #84a4f1;
+  --color-ink: #161513;
+  --color-cream: #f2f0ec;
+  --color-muted: #6b675f;
+  --color-tag: #59564f;
+  --color-border-soft: #d8d4cc;
+  --color-subtle: #c4c0b7;
+  --color-accent: #8a8680;
+
+  --color-edit: oklch(38% 0.1 250);
+  --color-delete: oklch(40% 0.13 25);
+}
+
+@layer components {
+  .heading {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .heading-hero {
+    font-size: clamp(30px, 5vw, 58px);
+    line-height: 1;
+  }
+
+  .heading-1 {
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.05;
+  }
+
+  .heading-2 {
+    font-size: clamp(26px, 4vw, 36px);
+  }
+
+  .heading-admin {
+    font-size: clamp(28px, 4vw, 38px);
+  }
 }
 
 .rich-text p {

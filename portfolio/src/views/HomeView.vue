@@ -1,40 +1,57 @@
 <script setup>
-import HeroIllustration from '@/components/HeroIllustration.vue'
-import BackgroundBlob from '@/components/BackgroundBlob.vue'
+const focusAreas = [
+  'Desarrollo full-stack con Laravel + Vue.js',
+  'Interfaces accesibles y cuidadas',
+  'Aprendizaje constante, del backend al frontend',
+]
 </script>
 
 <template>
   <section
-    class="relative overflow-hidden max-w-5xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-2 gap-12 md:gap-16 items-center border-b border-stone-200"
+    class="min-h-[70vh] md:min-h-[calc(100vh-61px)] bg-ink px-6 md:px-16 py-10 md:py-12 flex flex-wrap gap-8 items-center"
     aria-labelledby="hero-heading"
   >
-    <BackgroundBlob color="#FBDDD5" size="380px" top="-8rem" left="-10rem" :opacity="0.6" />
-    <BackgroundBlob color="#84A4F1" size="280px" bottom="-6rem" right="-6rem" :opacity="0.25" />
-
-    <div>
-      <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-6">
-        Desarrolladora Full-Stack · Gijón
+    <div class="flex-[3_1_500px]">
+      <p class="font-sans text-xs font-bold tracking-[0.2em] uppercase text-subtle mb-3.5">
+        Portfolio — Full-Stack Dev
       </p>
-      <h1
-        id="hero-heading"
-        class="font-serif text-5xl md:text-6xl leading-tight text-slate-800 font-normal mb-8"
-      >
-        Código que<br />
-        funciona para<br />
-        <em class="text-marigold not-italic">quien lo usa.</em>
+      <h1 id="hero-heading" class="heading heading-1 mb-4.5 text-cream tracking-tight">
+        La tecnología funciona mejor cuando está pensada para las personas.
       </h1>
-      <p class="font-sans text-base text-slate-600 leading-relaxed mb-8">
-        Llegué a la programación después de años trabajando de cara al público. Me importa que las
-        cosas funcionen bien para quien las usa, no solo para quien las escribe.
+      <p class="font-sans text-[15px] leading-normal text-cream/90 max-w-120 mb-5.5">
+        Después de años trabajando de cara al público, me formé como desarrolladora web para
+        construir aplicaciones útiles, intuitivas y fáciles de mantener.
       </p>
-      <RouterLink
-        to="/proyectos"
-        class="font-sans text-xs tracking-widest uppercase text-slate-600 border-b-2 border-marigold pb-0.5 hover:text-slate-800 transition-colors"
-      >
-        Ver proyectos →
-      </RouterLink>
+      <p class="font-sans text-[15px] leading-normal text-cream/90 max-w-120 mb-5.5">
+        Mi objetivo es crear productos funcionales, escalables y fáciles de utilizar.
+      </p>
+      <div class="flex flex-wrap gap-3.5 justify-center md:justify-start">
+        <RouterLink
+          to="/proyectos"
+          class="bg-cream border border-cream text-ink px-6.5 py-3 font-bold text-[13px] uppercase tracking-[0.08em] focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-[3px]"
+        >
+          Ver proyectos
+        </RouterLink>
+        <a
+          href="/CV_PilarFernandezNieto.pdf"
+          download
+          class="border border-cream text-cream px-6.5 py-3 font-bold text-[13px] uppercase tracking-[0.08em] focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-[3px]"
+        >
+          Descargar CV
+        </a>
+      </div>
     </div>
-
-    <HeroIllustration />
+    <div
+      class="flex flex-col gap-4 border-l border-cream/30 pl-7 flex-[1_1_220px]"
+      aria-label="Áreas de foco"
+    >
+      <div
+        v-for="area in focusAreas"
+        :key="area"
+        class="font-sans text-sm leading-normal text-cream"
+      >
+        {{ area }}
+      </div>
+    </div>
   </section>
 </template>

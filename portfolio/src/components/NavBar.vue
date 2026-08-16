@@ -20,27 +20,17 @@ const links = [
 ]
 </script>
 <template>
-  <header class="sticky top-0 z-50 bg-stone-50 border-b border-stone-200">
+  <header class="sticky top-0 z-50 bg-cream border-b border-ink">
     <nav
-      class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center"
+      class="max-w-5xl mx-auto px-6 py-3.5 flex flex-wrap gap-4 justify-between items-center"
       aria-label="Navegación principal"
     >
-      <RouterLink
-        to="/"
-        class="flex items-center gap-2.5 font-serif text-slate-800 text-base tracking-wide hover:text-slate-600 transition-colors"
-        aria-label="Ir al inicio"
-      >
-        <span
-          class="w-7 h-7 rounded-md bg-marigold text-slate-900 flex items-center justify-center font-serif text-sm"
-          aria-hidden="true"
-        >
-          P
-        </span>
+      <RouterLink to="/" class="font-sans text-lg font-bold tracking-wide uppercase text-ink">
         Pilar Fernández Nieto
       </RouterLink>
 
       <button
-        class="md:hidden text-slate-600 hover:text-slate-800 transition-colors"
+        class="md:hidden text-ink"
         aria-label="Abrir menú"
         aria-controls="nav-menu"
         @click="toggleMenu"
@@ -52,17 +42,21 @@ const links = [
 
       <ul
         id="nav-menu"
-        class="hidden md:flex gap-8 items-center list-none"
+        class="hidden md:flex flex-wrap gap-8 items-center list-none"
         :class="{
-          'flex flex-col absolute top-full left-0 w-full bg-stone-50 border-b border-stone-200 px-6 py-4 gap-4':
+          'flex flex-col absolute top-full left-0 w-full bg-cream border-b border-ink px-6 py-4 gap-4':
             menuOpen,
         }"
       >
         <li v-for="link in links" :key="link.to">
           <RouterLink
             :to="{ name: link.name }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
-            :class="{ 'text-marigold font-semibold': route.name === link.name }"
+            class="font-sans text-[13px] font-semibold tracking-[0.12em] uppercase text-ink focus-visible:outline focus-visible:outline-ink focus-visible:outline-offset-[3px]"
+            :class="
+              route.name === link.name
+                ? 'border-b-2 border-ink pb-0.5'
+                : 'hover:opacity-70 transition-opacity'
+            "
           >
             {{ link.label }}
           </RouterLink>
@@ -70,7 +64,7 @@ const links = [
         <li v-if="auth.isAuthenticated">
           <RouterLink
             :to="{ name: 'admin' }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-500 border border-stone-300 px-3 py-1.5 rounded hover:text-periwinkle hover:border-periwinkle transition-colors"
+            class="font-sans text-xs font-semibold tracking-widest uppercase text-ink border border-ink px-3 py-1.5 hover:bg-ink hover:text-cream transition-colors"
           >
             Admin
           </RouterLink>
@@ -80,13 +74,13 @@ const links = [
 
     <ul
       v-if="menuOpen"
-      class="md:hidden flex flex-col bg-stone-50 border-b border-stone-200 px-6 py-4 gap-4 list-none"
+      class="md:hidden flex flex-col bg-cream border-b border-ink px-6 py-4 gap-4 list-none"
     >
       <li v-for="link in links" :key="link.to">
         <RouterLink
           :to="{ name: link.name }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
-          :class="{ 'text-marigold font-semibold': route.name === link.name }"
+          class="font-sans text-[13px] font-semibold tracking-[0.12em] uppercase text-ink"
+          :class="route.name === link.name ? 'border-b-2 border-ink pb-0.5 w-fit' : ''"
           @click="menuOpen = false"
         >
           {{ link.label }}
@@ -95,7 +89,7 @@ const links = [
       <li v-if="auth.isAuthenticated">
         <RouterLink
           :to="{ name: 'admin' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-500 hover:text-periwinkle transition-colors"
+          class="font-sans text-xs font-semibold tracking-widest uppercase text-ink"
           @click="menuOpen = false"
         >
           Admin

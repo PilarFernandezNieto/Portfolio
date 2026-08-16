@@ -1,19 +1,31 @@
 <script setup></script>
 
 <template>
-  <footer class="border-t border-stone-200 mt-auto">
+  <footer class="bg-ink mt-auto">
     <div
-      class="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4"
+      class="max-w-5xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4 font-sans text-xs tracking-[0.08em] uppercase text-cream/75"
     >
-      <p class="font-sans text-xs text-slate-500">© 2025 Pilar Fernández Nieto</p>
-      <a
-        href="/CV_PilarFernandezNieto.pdf"
-        download
-        class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors flex items-center gap-2"
-        aria-label="Descargar CV en PDF"
-      >
-        <span>↓</span> Descargar CV
-      </a>
+      <p>© 2026 Pilar Fernández Nieto</p>
+      <div class="flex flex-wrap items-center gap-6">
+        <a
+          href="#"
+          class="text-cream hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-cream focus-visible:outline-offset-[3px]"
+        >
+          GitHub
+        </a>
+        <a
+          href="#"
+          class="text-cream hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-cream focus-visible:outline-offset-[3px]"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="#"
+          class="text-cream hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-cream focus-visible:outline-offset-[3px]"
+        >
+          Email
+        </a>
+      </div>
     </div>
   </footer>
 </template>

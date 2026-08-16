@@ -30,68 +30,73 @@ async function handleDelete(id) {
 
 <template>
   <div>
-    <header class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-10">
+    <header class="flex flex-wrap justify-between items-end gap-5 mb-10">
       <div>
-        <p class="font-sans text-xs tracking-widest uppercase text-marigold font-semibold mb-2">
+        <p class="font-sans text-xs font-bold tracking-[0.2em] uppercase text-muted mb-2.5">
           Administración
         </p>
-        <h1 class="font-serif text-3xl text-slate-800 font-normal">Proyectos</h1>
+        <h1 class="heading heading-admin">
+          Proyectos
+        </h1>
       </div>
       <RouterLink
         :to="{ name: 'admin-projects-create' }"
-        class="font-sans text-xs tracking-widest uppercase text-slate-900 bg-marigold px-5 py-3 rounded hover:opacity-90 transition-opacity text-center sm:self-auto self-start"
+        class="font-sans text-[13px] font-bold tracking-widest uppercase text-ink border border-ink px-6 py-3 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
       >
-        + Nuevo proyecto
+        Añadir proyecto
       </RouterLink>
     </header>
 
     <div
       v-if="successMessage"
       role="status"
-      class="font-sans text-sm text-green-600 bg-green-50 border border-green-200 rounded px-4 py-3 mb-6"
+      class="font-sans text-sm text-ink border border-ink px-4 py-3 mb-6"
     >
       {{ successMessage }}
     </div>
 
-    <div
-      v-if="store.error"
-      role="alert"
-      class="font-sans text-sm text-red-500 bg-red-50 border border-red-200 rounded px-4 py-3 mb-6"
-    >
+    <div v-if="store.error" role="alert" class="font-sans text-sm text-red-600 border border-red-300 px-4 py-3 mb-6">
       {{ store.error }}
     </div>
 
     <AppSpinner v-if="store.loading" />
 
-    <div v-else class="flex flex-col gap-4">
+    <div v-else role="table" aria-label="Listado de proyectos" class="flex flex-col">
       <div
-        v-for="project in store.projects"
-        :key="project.id"
-        class="bg-white border border-stone-200 rounded-lg px-6 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4"
+        role="row"
+        class="flex gap-5 pb-3.5 border-b border-ink font-sans text-[11px] font-bold tracking-wider uppercase text-muted"
       >
-        <div>
-          <p class="font-serif text-lg text-slate-800">{{ project.title }}</p>
-          <div class="flex gap-2 mt-2 flex-wrap">
-            <span
-              v-for="tech in project.technologies"
-              :key="tech"
-              class="font-sans text-xs bg-blush/60 text-slate-700 px-2 py-0.5 rounded-sm"
-            >
-              {{ tech }}
-            </span>
+        <div class="flex-[0_0_60px]">Índice</div>
+        <div class="flex-[2_1_260px]">Proyecto</div>
+        <div class="flex-[0_0_160px] text-right">Acciones</div>
+      </div>
+
+      <div
+        v-for="(project, index) in store.projects"
+        :key="project.id"
+        role="row"
+        class="flex flex-wrap gap-5 items-center py-5 border-b border-border-soft"
+      >
+        <div class="flex-[0_0_60px] font-sans text-[13px] text-muted">
+          {{ String(index + 1).padStart(2, '0') }}
+        </div>
+        <div class="flex-[2_1_260px]">
+          <div class="font-serif text-[17px] text-ink uppercase">{{ project.title }}</div>
+          <div v-if="project.intro" class="font-sans text-[13px] text-ink/65 mt-1">
+            {{ project.intro }}
           </div>
         </div>
-
-        <div class="flex gap-4 shrink-0 sm:ml-6">
+        <div class="flex-[0_0_160px] flex gap-2 justify-end">
           <RouterLink
             :to="{ name: 'admin-projects-edit', params: { id: project.id } }"
-            class="font-sans text-xs tracking-widest uppercase text-slate-600 hover:text-marigold transition-colors"
+            class="text-cream font-sans text-xs font-bold tracking-wider uppercase bg-edit border border-edit px-3.5 py-2 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
           >
             Editar
           </RouterLink>
           <button
+            type="button"
             @click="handleDelete(project.id)"
-            class="font-sans text-xs tracking-widest uppercase text-red-400 hover:text-red-600 transition-colors"
+            class="text-cream font-sans text-xs font-bold tracking-wider uppercase bg-delete border border-delete px-3.5 py-2 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
           >
             Eliminar
           </button>
@@ -99,7 +104,7 @@ async function handleDelete(id) {
       </div>
 
       <div v-if="!store.loading && store.projects.length === 0" class="text-center py-24">
-        <p class="font-sans text-sm text-slate-500">No hay proyectos todavía.</p>
+        <p class="font-sans text-sm text-muted">No hay proyectos todavía.</p>
       </div>
     </div>
   </div>

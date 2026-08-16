@@ -2,8 +2,6 @@
 import { computed, onMounted } from 'vue'
 import { useAboutStore } from '@/stores/about'
 import AppSpinner from '@/components/AppSpinner.vue'
-import SectionTag from '@/components/SectionTag.vue'
-import BackgroundBlob from '@/components/BackgroundBlob.vue'
 import DOMPurify from 'dompurify'
 
 const aboutStore = useAboutStore()
@@ -18,33 +16,74 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-6 py-24">
+  <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
     <AppSpinner v-if="aboutStore.loading" />
-    <div v-else-if="aboutStore.error" class="flex justify-center py-23">
+    <div v-else-if="aboutStore.error" class="flex justify-center py-24">
       <p class="font-sans text-sm text-red-400">{{ aboutStore.error }}</p>
     </div>
     <template v-else-if="aboutStore.about">
-      <section class="relative mb-20" aria-labelledby="about-heading">
-        <BackgroundBlob color="#F7DB88" size="300px" top="-4rem" right="-8rem" :opacity="0.35" />
-        <SectionTag label="Sobre mí" class="mb-6" />
+      <section
+        class="flex flex-wrap gap-12 items-center pb-16 mb-16 border-b border-ink"
+        aria-labelledby="about-heading"
+      >
         <div
-          class="rich-text font-serif text-2xl md:text-3xl text-slate-800 leading-relaxed bg-blush/40 border border-blush rounded-2xl px-8 py-10 md:px-12 md:py-12"
-          v-html="sanitizedBio"
-        />
+          role="img"
+          aria-label="Marcador de foto de retrato"
+          class="flex-[1_1_260px] max-w-80 aspect-3/4 flex items-center justify-center bg-border-soft"
+          style="
+            background-image: repeating-linear-gradient(
+              135deg,
+              #161513 0px,
+              #161513 1px,
+              transparent 1px,
+              transparent 12px
+            );
+          "
+        >
+          <span class="font-mono text-xs text-ink bg-cream px-3 py-1.5">foto: retrato</span>
+        </div>
+
+        <div class="flex-[2_1_420px]">
+          <p class="font-sans text-[13px] font-bold tracking-[0.2em] uppercase text-muted mb-4.5">
+            Sobre mí
+          </p>
+          <h1
+            id="about-heading"
+            class="heading heading-1 mb-5.5"
+          >
+            Full-stack, de la base de datos a la última interacción
+          </h1>
+          <div
+            class="rich-text font-sans text-[17px] leading-relaxed text-ink/85 max-w-145 mb-7"
+            v-html="sanitizedBio"
+          />
+          <a
+            href="/CV_PilarFernandezNieto.pdf"
+            download
+            class="inline-block border border-ink text-ink px-6 py-3 font-sans font-bold text-[13px] uppercase tracking-widest focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-[3px]"
+          >
+            Descargar CV
+          </a>
+        </div>
       </section>
 
       <section aria-labelledby="details-heading">
-        <SectionTag label="Detalles" color="periwinkle" class="mb-6" />
+        <h2
+          id="details-heading"
+          class="heading heading-2 mb-8"
+        >
+          Detalles
+        </h2>
         <dl class="grid sm:grid-cols-2 gap-4">
           <div
             v-for="detail in aboutStore.about.details"
             :key="detail.label"
-            class="border border-stone-200 rounded-lg px-5 py-4 bg-white"
+            class="border border-ink px-5 py-4"
           >
-            <dt class="font-sans text-xs tracking-widest uppercase text-slate-500 mb-1">
+            <dt class="font-sans text-xs font-bold tracking-[0.14em] uppercase text-muted mb-1">
               {{ detail.label }}
             </dt>
-            <dd class="font-sans text-sm text-slate-800 font-medium">
+            <dd class="font-sans text-sm text-ink font-medium">
               {{ detail.value }}
             </dd>
           </div>

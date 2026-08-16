@@ -30,21 +30,13 @@ async function handleLogout() {
 </script>
 
 <template>
-  <div class="h-screen bg-stone-50 flex flex-col md:flex-row overflow-hidden">
-    <header class="md:hidden flex items-center justify-between px-4 py-4 bg-slate-800 shrink-0">
-      <div class="flex items-center gap-2.5">
-        <span
-          class="w-7 h-7 rounded-md bg-marigold text-slate-900 flex items-center justify-center font-serif text-sm shrink-0"
-          aria-hidden="true"
-        >
-          P
-        </span>
-        <p class="font-serif text-white text-lg leading-none">Panel</p>
-      </div>
+  <div class="h-screen bg-cream flex flex-col md:flex-row overflow-hidden">
+    <header class="md:hidden flex items-center justify-between px-5 py-4 bg-ink shrink-0">
+      <p class="font-sans text-base uppercase tracking-tight text-cream">Panel</p>
       <button
         type="button"
         @click="mobileMenuOpen = !mobileMenuOpen"
-        class="text-slate-300 hover:text-white p-2 -mr-2"
+        class="text-cream p-2 -mr-2"
         :aria-expanded="mobileMenuOpen"
         aria-label="Abrir menú de administración"
       >
@@ -85,62 +77,54 @@ async function handleLogout() {
 
     <div
       v-if="mobileMenuOpen"
-      class="fixed inset-0 bg-slate-900/50 z-30 md:hidden"
+      class="fixed inset-0 bg-ink/50 z-30 md:hidden"
       @click="mobileMenuOpen = false"
     />
 
     <aside
-      class="w-64 bg-slate-800 flex flex-col shrink-0 fixed md:static inset-y-0 left-0 z-40 transition-transform duration-200 md:translate-x-0"
+      class="w-60 bg-ink flex flex-col shrink-0 fixed md:static inset-y-0 left-0 z-40 transition-transform duration-200 md:translate-x-0"
       :class="mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'"
       aria-label="Panel de administración"
     >
-      <div class="px-6 py-8 border-b border-slate-700 flex items-center gap-2.5">
-        <span
-          class="w-7 h-7 rounded-md bg-marigold text-slate-900 flex items-center justify-center font-serif text-sm shrink-0"
-          aria-hidden="true"
-        >
-          P
-        </span>
-        <div>
-          <p class="font-serif text-white text-lg leading-none">Panel</p>
-          <p class="font-sans text-xs text-slate-300 mt-1">Pilar Fernández Nieto</p>
-        </div>
+      <div class="px-7 pt-7 pb-8">
+        <p class="font-sans text-lg uppercase tracking-tight text-cream">Panel</p>
+        <p class="font-sans text-xs text-subtle mt-1">Pilar Fernández Nieto</p>
       </div>
 
-      <nav class="flex-1 px-4 py-6 flex flex-col gap-2">
+      <nav class="flex-1 flex flex-col gap-1">
         <RouterLink
           :to="{ name: 'admin-projects' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-300 hover:text-marigold px-4 py-3 rounded hover:bg-slate-700 transition-colors"
-          :class="{ 'text-marigold bg-slate-700 font-semibold': $route.name === 'admin-projects' }"
+          class="text-left font-sans text-[13px] font-bold tracking-widest uppercase text-cream px-7 py-3.5"
+          :class="$route.name?.startsWith('admin-projects') ? 'bg-cream/10' : 'hover:bg-cream/5'"
         >
           Proyectos
         </RouterLink>
         <RouterLink
           :to="{ name: 'admin-about' }"
-          class="font-sans text-xs tracking-widest uppercase text-slate-300 hover:text-marigold px-4 py-3 rounded hover:bg-slate-700 transition-colors"
-          :class="{ 'text-marigold bg-slate-700 font-semibold': $route.name === 'admin-about' }"
+          class="text-left font-sans text-[13px] font-bold tracking-widest uppercase text-cream px-7 py-3.5"
+          :class="$route.name === 'admin-about' ? 'bg-cream/10' : 'hover:bg-cream/5'"
         >
           Sobre mí
         </RouterLink>
       </nav>
 
-      <div class="px-4 py-6 border-t border-slate-700 flex flex-col gap-2">
+      <div class="border-t border-cream/20">
         <RouterLink
           :to="{ name: 'home' }"
-          class="w-full font-sans text-xs tracking-widest uppercase text-slate-300 hover:text-periwinkle px-4 py-3 rounded hover:bg-slate-700 transition-colors"
+          class="block w-full font-sans text-xs font-semibold tracking-widest uppercase text-subtle hover:text-cream px-7 py-3.5 transition-colors"
         >
           Ver portfolio
         </RouterLink>
         <button
           @click="handleLogout"
-          class="w-full font-sans text-xs tracking-widest uppercase text-slate-300 hover:text-periwinkle px-4 py-3 rounded hover:bg-slate-700 transition-colors text-left"
+          class="w-full text-left font-sans text-xs font-semibold tracking-widest uppercase text-subtle hover:text-cream px-7 py-3.5 transition-colors"
         >
           Cerrar sesión
         </button>
       </div>
     </aside>
 
-    <main class="flex-1 p-6 md:p-10 overflow-y-auto min-h-0">
+    <main class="flex-1 p-6 md:p-14 overflow-y-auto min-h-0">
       <RouterView />
     </main>
   </div>

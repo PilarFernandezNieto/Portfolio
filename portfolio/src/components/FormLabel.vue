@@ -10,7 +10,7 @@ defineProps({
 <template>
   <label
     :for="for"
-    class="font-sans text-xs tracking-widest uppercase text-slate-500 font-semibold"
+    class="block font-sans text-[11px] font-bold tracking-[0.14em] uppercase text-ink mb-2.5"
   >
     <slot />
   </label>
