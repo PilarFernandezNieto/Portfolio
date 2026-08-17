@@ -36,7 +36,12 @@ onMounted(() => {
           aria-label="Marcador de foto de retrato"
           class="flex-[1_1_260px] max-w-80 aspect-3/4 flex items-center justify-center bg-border-soft"
         >
-          <img v-if="imageUrl" :src="imageUrl" alt="" class="w-full h-full object-cover" />
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            alt=""
+            class="w-full h-full object-cover grayscale-50"
+          />
         </div>
 
         <div class="flex-[2_1_420px]">
