@@ -12,6 +12,7 @@ export const useAboutStore = defineStore('about', () => {
     error.value = null
     try {
       const { data } = await api.get('/about')
+
       about.value = data.data
     } catch (e) {
       error.value = e.response?.data?.message || 'Error al cargar la información'

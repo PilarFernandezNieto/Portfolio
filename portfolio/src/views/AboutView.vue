@@ -7,6 +7,10 @@ import DOMPurify from 'dompurify'
 
 const aboutStore = useAboutStore()
 
+const imageUrl = computed(() =>
+  aboutStore.about.image ? `${import.meta.env.VITE_STORAGE_URL}/${aboutStore.about.image}` : null,
+)
+
 const sanitizedBio = computed(() =>
   aboutStore.about ? DOMPurify.sanitize(aboutStore.about.bio) : '',
 )
@@ -31,27 +35,15 @@ onMounted(() => {
           role="img"
           aria-label="Marcador de foto de retrato"
           class="flex-[1_1_260px] max-w-80 aspect-3/4 flex items-center justify-center bg-border-soft"
-          style="
-            background-image: repeating-linear-gradient(
-              135deg,
-              #161513 0px,
-              #161513 1px,
-              transparent 1px,
-              transparent 12px
-            );
-          "
         >
-          <span class="font-mono text-xs text-ink bg-cream px-3 py-1.5">foto: retrato</span>
+          <img v-if="imageUrl" :src="imageUrl" alt="" class="w-full h-full object-cover" />
         </div>
 
         <div class="flex-[2_1_420px]">
           <p class="font-sans text-[13px] font-bold tracking-[0.2em] uppercase text-muted mb-4.5">
             Sobre mí
           </p>
-          <h1
-            id="about-heading"
-            class="heading heading-1 mb-5.5"
-          >
+          <h1 id="about-heading" class="heading heading-1 mb-5.5">
             Full-stack, de la base de datos a la última interacción
           </h1>
           <div
@@ -65,12 +57,7 @@ onMounted(() => {
       </section>
 
       <section aria-labelledby="details-heading">
-        <h2
-          id="details-heading"
-          class="heading heading-2 mb-8"
-        >
-          Detalles
-        </h2>
+        <h2 id="details-heading" class="heading heading-2 mb-8">Detalles</h2>
         <dl class="grid sm:grid-cols-2 gap-4">
           <div
             v-for="detail in aboutStore.about.details"
