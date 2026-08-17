@@ -9,7 +9,8 @@ class About extends Model
     protected $table = 'about';
     protected $fillable = [
         'bio',
-        'details'
+        'details',
+        'image'
     ];
     protected $casts = [
         'details' => 'array'

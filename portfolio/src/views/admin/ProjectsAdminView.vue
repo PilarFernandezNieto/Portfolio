@@ -1,12 +1,13 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
+import { useToast } from 'primevue/usetoast'
 import { useProjectsStore } from '@/stores/projects'
 import { useConfirm } from '@/composables/useConfirm'
 import AppSpinner from '@/components/AppSpinner.vue'
 import ButtonDark from '@/components/ButtonDark.vue'
 
 const store = useProjectsStore()
-const successMessage = ref(null)
+const toast = useToast()
 const { confirm } = useConfirm()
 
 onMounted(() => {
@@ -21,8 +22,7 @@ async function handleDelete(id) {
   if (!ok) return
   try {
     const message = await store.deleteProject(id)
-    successMessage.value = message
-    setTimeout(() => (successMessage.value = null), 3000)
+    toast.add({ severity: 'success', summary: message, life: 3000 })
   } catch {
     // el error ya está en store.error
   }
@@ -46,14 +46,10 @@ async function handleDelete(id) {
     </header>
 
     <div
-      v-if="successMessage"
-      role="status"
-      class="font-sans text-sm text-ink border border-ink px-4 py-3 mb-6"
+      v-if="store.error"
+      role="alert"
+      class="font-sans text-sm text-red-600 border border-red-300 px-4 py-3 mb-6"
     >
-      {{ successMessage }}
-    </div>
-
-    <div v-if="store.error" role="alert" class="font-sans text-sm text-red-600 border border-red-300 px-4 py-3 mb-6">
       {{ store.error }}
     </div>
 

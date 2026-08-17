@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import Toast from 'primevue/toast'
 
 const router = useRouter()
 const route = useRoute()
@@ -31,6 +32,8 @@ async function handleLogout() {
 
 <template>
   <div class="h-screen bg-cream flex flex-col md:flex-row overflow-hidden">
+    <Toast position="top-right" />
+
     <header class="md:hidden flex items-center justify-between px-5 py-4 bg-ink shrink-0">
       <p class="font-sans text-base uppercase tracking-tight text-cream">Panel</p>
       <button

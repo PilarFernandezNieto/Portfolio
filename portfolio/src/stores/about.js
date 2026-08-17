@@ -20,10 +20,12 @@ export const useAboutStore = defineStore('about', () => {
     }
   }
 
-  async function updateAbout(payload) {
+  async function updateAbout(formData) {
     error.value = null
     try {
-      const { data } = await api.put(`/admin/about/${about.value.id}`, payload)
+      const { data } = await api.post(`/admin/about/${about.value.id}?_method=PUT`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
       about.value = data.data
       return data.message
     } catch (e) {

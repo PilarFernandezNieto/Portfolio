@@ -41,7 +41,7 @@ export const useProjectsStore = defineStore('projects', () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       projects.value.push(data.data)
-      return data.data
+      return data
     } catch (e) {
       error.value = e.response?.data?.message || 'Error al crear el proyecto'
       throw e
@@ -57,7 +57,7 @@ export const useProjectsStore = defineStore('projects', () => {
       const index = projects.value.findIndex((p) => p.id === id)
       if (index !== -1) projects.value[index] = data.data
       project.value = data.data
-      return data.data
+      return data
     } catch (e) {
       error.value = e.response?.data?.message || 'Error al actualizar el proyecto'
       throw e

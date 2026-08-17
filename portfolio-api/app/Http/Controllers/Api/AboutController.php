@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AboutRequest;
 use App\Http\Resources\AboutResource;
 use App\Models\About;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -18,7 +19,15 @@ class AboutController extends Controller
 
     public function store(AboutRequest $request)
     {
-        $about = About::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('about', 'public');
+        }
+
+        $about = About::create($data);
+
+
 
         return response()->json([
             'message' => 'Información creada correctamente',
@@ -35,7 +44,16 @@ class AboutController extends Controller
 
     public function update(AboutRequest $request, About $about)
     {
-        $about->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($about->image) {
+                Storage::disk('public')->delete($about->image);
+            }
+            $data['image'] = $request->file('image')->store('about', 'public');
+        }
+
+        $about->update($data);
 
         return response()->json([
             'message' => 'Información actualizada correctamente',
@@ -45,6 +63,10 @@ class AboutController extends Controller
 
     public function destroy(About $about)
     {
+
+        if ($about->image) {
+            Storage::disk('public')->delete($about->image);
+        }
         $about->delete();
 
         return response()->json([

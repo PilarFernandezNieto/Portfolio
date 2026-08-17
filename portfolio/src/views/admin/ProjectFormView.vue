@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useToast } from 'primevue/usetoast'
 import { useProjectsStore } from '@/stores/projects'
 import RichTextEditor from '@/components/RichTextEditor.vue'
 import FormLabel from '@/components/FormLabel.vue'
@@ -9,6 +10,7 @@ import ButtonDark from '@/components/ButtonDark.vue'
 const router = useRouter()
 const route = useRoute()
 const store = useProjectsStore()
+const toast = useToast()
 
 const isEditing = computed(() => !!route.params.id)
 const imagePreview = ref(null)
@@ -119,11 +121,13 @@ async function handleSubmit() {
 
   try {
     if (isEditing.value) {
-      await store.updateProject(route.params.id, formData)
+      const result = await store.updateProject(route.params.id, formData)
+      toast.add({ severity: 'success', summary: result.message, life: 3000 })
       router.push({ name: 'admin-projects' })
     } else {
-      const created = await store.createProject(formData)
-      router.push({ name: 'admin-projects-edit', params: { id: created.id } })
+      const result = await store.createProject(formData)
+      toast.add({ severity: 'success', summary: result.message, life: 3000 })
+      router.push({ name: 'admin-projects-edit', params: { id: result.data.id } })
     }
   } catch {
     // el error ya está en store.error

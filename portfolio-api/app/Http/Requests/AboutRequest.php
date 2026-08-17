@@ -21,7 +21,8 @@ class AboutRequest extends FormRequest
         $required = $this->isMethod('POST') ? 'required' : 'sometimes';
         return [
             'bio' => "$required|string",
-            'details' => "$required|array"
+            'details' => "$required|array",
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 }
