@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-serif: 'Bodoni Moda', Georgia, serif;
+  --font-serif: 'Fraunces', serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
   --color-ink: #161513;

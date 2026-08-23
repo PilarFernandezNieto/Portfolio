@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pilar Fernández Nieto — Desarrolladora Full-Stack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -16,14 +18,16 @@
       }
 
       :root {
-        --slate: #2c3e50;
-        --slate-mid: #3d5166;
-        --slate-light: #5b7a99;
-        --accent: #7fb3d3;
-        --bg: #f7f8fa;
-        --text: #1a2530;
-        --text-soft: #4a6070;
-        --rule: #d0dde8;
+        --ink: #161513;
+        --ink-soft: #59564f;
+        --ink-faint: #8a8680;
+        --bg: #f2f0ec;
+        --rule: #161513;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--ink);
       }
 
       /* ── PANTALLA: centrado con fondo gris para previsualizar ── */
@@ -35,15 +39,10 @@
           align-items: flex-start;
           padding: 30px;
           min-height: 100vh;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 9pt;
-          color: var(--text);
-          line-height: 1.45;
         }
         .cv-page {
           width: 210mm;
           min-height: 297mm;
-          background: white;
           box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
         }
       }
@@ -57,10 +56,6 @@
         body {
           margin: 0;
           padding: 0;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 9pt;
-          color: var(--text);
-          line-height: 1.45;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
         }
@@ -71,502 +66,330 @@
         }
       }
 
-      /* ── LAYOUT ── */
+      /* ── PÁGINA ── */
       .cv-page {
-        display: grid;
-        grid-template-columns: 64mm 1fr;
-        height: 297mm;
+        font-family: 'Inter', sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        position: relative;
+        overflow: hidden;
+        padding: 0 46px 40px;
       }
 
-      /* ── SIDEBAR ── */
-      .sidebar {
-        background: var(--slate);
-        color: white;
-        padding: 8mm 6mm 8mm 7mm;
+      .top-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 14px;
+        background: var(--ink);
+      }
+
+      /* ── CABECERA ── */
+      .header {
         display: flex;
-        flex-direction: column;
-        gap: 5mm;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        position: relative;
+        padding-top: 74px;
+        margin-bottom: 22px;
       }
 
-      .name-block {
-        border-bottom: 1px solid var(--slate-light);
-        padding-bottom: 5mm;
+      .header img {
+        width: 96px;
+        height: 120px;
+        object-fit: cover;
+        border: 1px solid var(--ink);
+        flex: 0 0 auto;
+        align-self: flex-end;
       }
 
-      .name-block h1 {
-        font-family: 'DM Serif Display', serif;
-        font-size: 20pt;
-        line-height: 1.05;
-        color: white;
-        margin-bottom: 2.5mm;
-      }
-
-      .role {
-        font-size: 7pt;
-        font-weight: 600;
-        color: var(--accent);
-        letter-spacing: 0.12em;
+      .header h1 {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-optical-sizing: auto;
+        font-size: 32pt;
+        margin: 0 0 6px;
         text-transform: uppercase;
+        line-height: 1;
       }
 
-      .contact-block {
-        display: flex;
-        flex-direction: column;
-        gap: 2mm;
+      .header .role {
+        font-size: 11pt;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
       }
 
-      .contact-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 2mm;
-        font-size: 8.2pt;
-        color: rgba(255, 255, 255, 0.82);
-        line-height: 1.35;
+      .header .contact {
+        text-align: right;
+        font-size: 9.5pt;
+        line-height: 1.7;
+        opacity: 0.85;
       }
 
-      .contact-item .icon {
-        color: var(--accent);
-        flex-shrink: 0;
-      }
-      .contact-item a {
-        color: rgba(255, 255, 255, 0.82);
-        text-decoration: none;
-      }
-      .contact-item a:hover {
+      .header .contact a {
+        color: var(--ink);
         text-decoration: underline;
       }
 
-      .sidebar-section {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5mm;
+      .rule {
+        border-top: 1px solid var(--ink);
+        margin-bottom: 22px;
       }
 
-      .sidebar-label {
-        font-size: 6.5pt;
-        font-weight: 600;
-        color: var(--accent);
-        letter-spacing: 0.18em;
+      h2 {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-optical-sizing: auto;
         text-transform: uppercase;
-        padding-bottom: 1.5mm;
-        border-bottom: 1px solid var(--slate-light);
+        margin: 0 0 8px;
       }
 
-      .skill-group {
-        margin-bottom: 2mm;
+      /* ── PERFIL ── */
+      .profile h2 {
+        font-size: 13pt;
+      }
+      .profile p {
+        font-size: 9.5pt;
+        line-height: 1.5;
+        margin: 0 0 24px;
+        opacity: 0.9;
+        width: 100%;
       }
 
-      .skill-group-name {
-        font-size: 8.2pt;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 1.2mm;
-      }
-
-      .skill-tags {
+      /* ── CUERPO EN DOS COLUMNAS ── */
+      .body-columns {
         display: flex;
-        flex-wrap: wrap;
-        gap: 1.2mm;
+        gap: 30px;
       }
 
-      .tag {
-        display: inline-block;
-        background: rgba(127, 179, 211, 0.15);
-        border: 1px solid rgba(127, 179, 211, 0.3);
-        color: rgba(255, 255, 255, 0.82);
-        font-size: 7.8pt;
-        padding: 0.8mm 2mm;
-        border-radius: 2px;
-        line-height: 1.3;
-      }
-
-      .tag-highlight {
-        display: inline-block;
-        background: rgba(127, 179, 211, 0.28);
-        border: 1px solid rgba(127, 179, 211, 0.55);
-        color: white;
-        font-size: 7.8pt;
-        font-weight: 600;
-        padding: 0.8mm 2mm;
-        border-radius: 2px;
-        line-height: 1.3;
-      }
-
-      .lang-item {
-        font-size: 8.5pt;
-        color: rgba(255, 255, 255, 0.82);
-      }
-      .lang-item span {
-        color: var(--accent);
-        font-weight: 600;
-      }
-
-      .soft-item {
-        font-size: 8.2pt;
-        color: rgba(255, 255, 255, 0.75);
-        padding-left: 3mm;
-        position: relative;
-      }
-
-      .soft-item::before {
-        content: '—';
-        position: absolute;
-        left: 0;
-        color: var(--accent);
-      }
-
-      /* ── MAIN ── */
-      .main {
-        background: white;
-        padding: 8mm 9mm 8mm 8mm;
+      .col-side {
+        flex: 0 0 30%;
+        border-right: 1px solid var(--ink);
+        padding-right: 26px;
         display: flex;
         flex-direction: column;
-        gap: 4.5mm;
+        gap: 20px;
       }
 
-      .summary-block {
-        background: var(--bg);
-        border-left: 3px solid var(--accent);
-        padding: 3mm 4mm;
+      .col-side h2 {
+        font-size: 12pt;
+      }
+
+      .list-plain {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
         font-size: 9pt;
-        color: var(--text-soft);
-        line-height: 1.55;
-        border-radius: 0 3px 3px 0;
+        opacity: 0.85;
       }
 
-      .summary-block strong {
-        color: var(--slate);
-        font-weight: 600;
-      }
-
-      .section {
+      .stack-group {
         display: flex;
         flex-direction: column;
-        gap: 2.8mm;
+        gap: 8px;
+        font-size: 9pt;
+        line-height: 1.4;
+        opacity: 0.85;
       }
 
-      .section-title {
-        font-size: 6.5pt;
-        font-weight: 600;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--slate-light);
-        padding-bottom: 1.5mm;
-        border-bottom: 1.5px solid var(--rule);
+      .lang-group {
+        font-size: 9pt;
+        line-height: 1.6;
+        opacity: 0.85;
       }
 
-      .entry {
+      .col-main {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 1mm;
+        gap: 20px;
       }
 
-      .entry-header {
+      .col-main h2 {
+        font-size: 12pt;
+        margin-bottom: 10px;
+      }
+
+      .col-main > div h2 {
+        margin-bottom: 8px;
+      }
+
+      .entries {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 2mm;
+        flex-direction: column;
+        gap: 12px;
       }
 
       .entry-title {
-        font-family: 'DM Serif Display', serif;
         font-size: 9.5pt;
-        color: var(--slate);
-        line-height: 1.15;
-      }
-
-      .entry-company {
-        font-size: 8.5pt;
-        font-weight: 600;
-        color: var(--slate-mid);
-      }
-
-      .entry-date {
-        font-size: 7.8pt;
-        color: var(--slate-light);
-        font-weight: 500;
-        white-space: nowrap;
-        background: var(--bg);
-        padding: 0.6mm 1.8mm;
-        border-radius: 2px;
-        flex-shrink: 0;
+        font-weight: 700;
       }
 
       .entry-meta {
-        font-size: 8.2pt;
-        color: var(--text-soft);
-        font-style: italic;
+        font-size: 8.5pt;
+        opacity: 0.75;
+        margin-bottom: 4px;
       }
 
-      .bullet-list {
+      .bullets {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 9pt;
+        line-height: 1.45;
+        opacity: 0.85;
         display: flex;
         flex-direction: column;
-        gap: 0.9mm;
-        padding-left: 4mm;
+        gap: 2px;
       }
 
-      .bullet-list li {
-        font-size: 8.8pt;
-        color: var(--text-soft);
-        list-style: disc;
-        padding-left: 1mm;
-        line-height: 1.4;
-      }
-
-      .bullet-list li::marker {
-        color: var(--accent);
-        font-size: 10pt;
-      }
-
-      .bullet-list li strong {
-        color: var(--slate);
-        font-weight: 600;
-      }
-
-      .edu-row {
+      .academics {
         display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 2mm;
-      }
-
-      .edu-title {
-        font-weight: 600;
+        flex-direction: column;
+        gap: 4px;
         font-size: 9pt;
-        color: var(--slate);
-      }
-      .edu-center {
-        font-size: 8.5pt;
-        color: var(--slate-mid);
-      }
-      .edu-date {
-        font-size: 8pt;
-        color: var(--slate-light);
-        white-space: nowrap;
+        opacity: 0.85;
       }
 
-      .projects-note {
-        font-size: 8.2pt;
-        color: var(--text-soft);
-        font-style: italic;
-      }
-      .github-link {
-        color: var(--slate-light);
-        font-weight: 600;
-        font-style: normal;
+      .projects {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 9pt;
+        line-height: 1.45;
+        opacity: 0.85;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
       }
     </style>
   </head>
   <body>
     <div class="cv-page">
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="name-block">
-          <h1>Pilar<br />Fernández<br />Nieto</h1>
-          <p class="role">Desarrolladora Full-Stack</p>
-        </div>
+      <div class="top-bar"></div>
 
-        <div class="contact-block">
-          <div class="sidebar-label">Contacto</div>
-          <div class="contact-item">
-            <span class="icon">✉</span><span>pilarfnieto@gmail.com</span>
-          </div>
-          <div class="contact-item"><span class="icon">☏</span><span>+34 626 34 01 44</span></div>
-          <div class="contact-item"><span class="icon">⌂</span><span>Gijón, Asturias</span></div>
+      <div class="header">
+        <img src="assets/img/pilar-retrato.jpg" alt="Pilar Fernández Nieto" />
+        <div>
+          <h1>Pilar Fernández Nieto</h1>
+          <div class="role">Desarrolladora Full-Stack</div>
         </div>
-        <div class="sidebar-section">
-          <div class="sidebar-label">Trabajos</div>
-          <div class="contact-item">
-            <span class="icon">◈</span>
-            <span>
-              <a href="https://pilarfdez.es" target="_blank" rel="noopener noreferrer">
-                https://pilarfdez.es
-              </a>
-            </span>
-          </div>
+        <div class="contact">
+          <div>+34 626 34 01 44</div>
+          <div>pilarfnieto@gmail.com</div>
+          <div>Gijón, Asturias · <a href="https://pilarfdez.es">pilarfdez.es</a></div>
         </div>
+      </div>
 
-        <div class="sidebar-section">
-          <div class="sidebar-label">Stack técnico</div>
+      <div class="rule"></div>
 
-          <div class="skill-group">
-            <div class="skill-group-name">Backend</div>
-            <div class="skill-tags">
-              <span class="tag-highlight">PHP</span>
-              <span class="tag-highlight">Laravel</span>
-              <span class="tag">APIs REST</span>
-              <span class="tag">MySQL</span>
-              <span class="tag">Twig / Smarty</span>
+      <div class="profile">
+        <h2>Perfil profesional</h2>
+        <p>
+          Desarrolladora full-stack con más de dos años de experiencia profesional en empresa de
+          desarrollo de software. Combino desarrollo técnico con formación a clientes y soporte en
+          producción — el ciclo completo, desde la API hasta el usuario final. Integro herramientas
+          de IA como Claude en mi flujo de trabajo como apoyo al aprendizaje y la toma de decisiones
+          técnicas. De manera autónoma desarrollo con Laravel + Vue.js, tanto en arquitectura
+          monolítica como en API desacoplada, con especial atención a la accesibilidad web y la
+          experiencia de usuario.
+        </p>
+      </div>
+
+      <div class="body-columns">
+        <div class="col-side">
+          <div>
+            <h2>Habilidades</h2>
+            <div class="list-plain">
+              <div>Trabajo en equipo</div>
+              <div>Orientación al cliente</div>
+              <div>Aprendizaje autónomo</div>
+              <div>Resolución de problemas</div>
+              <div>Adaptación al cambio</div>
             </div>
           </div>
 
-          <div class="skill-group">
-            <div class="skill-group-name">Frontend</div>
-            <div class="skill-tags">
-              <span class="tag-highlight">Vue.js 3</span>
-              <span class="tag-highlight">Pinia</span>
-              <span class="tag">Vue Router</span>
-              <span class="tag">Axios</span>
-              <span class="tag">Bootstrap</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">jQuery</span>
+          <div>
+            <h2>Stack técnico</h2>
+            <div class="stack-group">
+              <div><strong>Backend</strong><br />PHP · Laravel · APIs REST · MySQL</div>
+              <div><strong>Frontend</strong><br />Vue.js 3 · Pinia · Vue Router · Bootstrap · jQuery</div>
+              <div><strong>Herramientas</strong><br />Git · Postman · Moodle · Prestashop · Tailwind</div>
             </div>
           </div>
 
-          <div class="skill-group">
-            <div class="skill-group-name">Herramientas</div>
-            <div class="skill-tags">
-              <span class="tag">Git</span>
-              <span class="tag">Postman</span>
-              <span class="tag">Moodle</span>
-              <span class="tag">Prestashop</span>
-              <span class="tag">Tailwind CSS</span>
-              <span class="tag">Blade / Livewire</span>
+          <div>
+            <h2>Idiomas</h2>
+            <div class="lang-group">
+              <div>Español — Nativo</div>
+              <div>Inglés — B2</div>
             </div>
           </div>
         </div>
 
-        <div class="sidebar-section">
-          <div class="sidebar-label">Idiomas</div>
-          <div class="lang-item"><span>Español</span> — Nativo</div>
-          <div class="lang-item"><span>Inglés</span> — B2 (en progreso)</div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-label">Perfil personal</div>
-          <div class="soft-item">Trabajo en equipo</div>
-          <div class="soft-item">Orientación al cliente</div>
-          <div class="soft-item">Aprendizaje autónomo</div>
-          <div class="soft-item">Resolución de problemas</div>
-          <div class="soft-item">Adaptación al cambio</div>
-        </div>
-      </aside>
-
-      <!-- MAIN -->
-      <main class="main">
-        <div class="summary-block">
-          Desarrolladora full-stack con más de
-          <strong>2 años de experiencia profesional</strong> en empresa de desarrollo de software.
-          Combino desarrollo técnico con formación a clientes y soporte en producción — el ciclo
-          completo, desde la API hasta el usuario final. Integro
-          <strong>herramientas de IA como Claude</strong> en mi flujo de trabajo como apoyo al
-          aprendizaje y la toma de decisiones técnicas.<br /><br />
-          De manera autónoma desarrollo con <strong>Laravel + Vue.js</strong>, tanto en arquitectura
-          monolítica como en API desacoplada. Presto especial atención a la
-          <strong>accesibilidad web</strong> y la experiencia de usuario en todo lo que construyo.
-        </div>
-
-        <div class="section">
-          <div class="section-title">Experiencia profesional</div>
-
-          <div class="entry">
-            <div class="entry-header">
+        <div class="col-main">
+          <div>
+            <h2>Experiencia laboral</h2>
+            <div class="entries">
               <div>
                 <div class="entry-title">Desarrolladora Web Full-Stack</div>
-                <div class="entry-company">Ticmedia Soluciones Profesionales · Gijón</div>
+                <div class="entry-meta">Ticmedia Soluciones Profesionales · Gijón | Ene 2024 — Hoy</div>
+                <ul class="bullets">
+                  <li>
+                    Desarrollo y mantenimiento de aplicaciones web con <b>framework</b> y
+                    <b>CMS propios en PHP</b>, utilizando HTML, CSS, Bootstrap, Sistema de plantillas
+                    Twig, JavaScript y jQuery.
+                  </li>
+                  <li>Gestión y personalización de tiendas <b>Prestashop</b> y plataformas de formación <b>Moodle</b>.</li>
+                  <li>
+                    Desarrollo y mantenimiento de <b>APIs REST</b> consumidas por interfaces en
+                    <b>Vue.js 3</b> con <b>Pinia</b> y <b>Vue Router</b>.
+                  </li>
+                  <li>
+                    Soporte técnico, configuración y formación presencial a clientes de
+                    <b>Restaurantic</b>, plataforma de gestión de reservas para hostelería.
+                  </li>
+                  <li>Soporte técnico de incidencias en producción.</li>
+                </ul>
               </div>
-              <span class="entry-date">Ene 2024 — Actualidad</span>
-            </div>
-            <ul class="bullet-list">
-              <li>
-                Desarrollo y mantenimiento de aplicaciones web con
-                <strong>framework y CMS propios en PHP</strong>, utilizando HTML, CSS,
-                <strong>Bootstrap</strong>, JavaScript y jQuery.
-              </li>
-              <li>
-                Gestión y personalización de tiendas
-                <strong>Prestashop</strong> y plataformas de formación <strong>Moodle</strong>.
-              </li>
-              <li>
-                Desarrollo y mantenimiento de
-                <strong>APIs REST</strong> consumidas por interfaces en
-                <strong>Vue.js 3</strong> con Pinia y Vue Router.
-              </li>
-              <li>
-                Soporte técnico, configuración y formación presencial a clientes en el uso de
-                <strong>Restaurantic</strong>, plataforma de gestión de reservas para hostelería.
-              </li>
-              <li>Soporte técnico de incidencias en producción.</li>
-            </ul>
-          </div>
-
-          <div class="entry">
-            <div class="entry-header">
               <div>
                 <div class="entry-title">Prácticas FCT — Desarrollo de Aplicaciones Web</div>
-                <div class="entry-company">Ticmedia Soluciones Profesionales</div>
+                <div class="entry-meta">Ticmedia Soluciones Profesionales | Sep — Dic 2023</div>
+                <ul class="bullets">
+                  <li>Herramienta de migración de datos entre estructuras distintas (JSON → MySQL).</li>
+                  <li>Primera experiencia con Git y trabajo en equipo profesional.</li>
+                </ul>
               </div>
-              <span class="entry-date">Sep — Dic 2023</span>
-            </div>
-            <ul class="bullet-list">
-              <li>
-                Herramienta de migración de datos entre estructuras distintas (JSON → MySQL).
-                Primera experiencia con
-                <strong>Git y trabajo en equipo</strong> profesional.
-              </li>
-            </ul>
-          </div>
-
-          <div class="entry">
-            <div class="entry-header">
               <div>
                 <div class="entry-title">Instructora de Fitness · Promotora de Ventas</div>
-                <div class="entry-company">Real Grupo Covadonga · El Corte Inglés</div>
+                <div class="entry-meta">Real Grupo Covadonga · El Corte Inglés | 2007 — 2023</div>
+                <ul class="bullets">
+                  <li>Más de 15 años en atención al público, coordinación de grupos y trabajo bajo presión.</li>
+                </ul>
               </div>
-              <span class="entry-date">2007 — 2023</span>
             </div>
-            <ul class="bullet-list">
-              <li>
-                Más de 15 años en atención al público, coordinación de grupos y trabajo bajo presión
-                — habilidades directamente aplicables al trato con clientes en entornos técnicos.
-              </li>
+          </div>
+
+          <div>
+            <h2>Datos académicos</h2>
+            <div class="academics">
+              <div><strong>CFGS Desarrollo de Aplicaciones Web</strong> — CIFP La Laboral, Gijón | 2021 — 2023</div>
+              <div><strong>Formación autónoma</strong> — Laravel · Vue.js · PHP avanzado · Tailwind · MySQL | 2022 — hoy</div>
+            </div>
+          </div>
+
+          <div>
+            <h2>Proyectos personales</h2>
+            <ul class="projects">
+              <li>Aplicaciones con Laravel 11: full-stack con Blade + Livewire, y API desacoplada con Vue.js + Pinia.</li>
+              <li>Exploración del stack MEVN (MongoDB, Express, Vue, Node) para ampliar conocimientos de backend.</li>
+              <li>Implementación de estándares de accesibilidad web: ARIA, semántica HTML, navegación por teclado y contraste de color.</li>
             </ul>
           </div>
         </div>
-
-        <div class="section">
-          <div class="section-title">Proyectos personales</div>
-          <ul class="bullet-list">
-            <li>
-              Aplicaciones con <strong>Laravel 11</strong>: full-stack con Blade + Livewire, y API
-              desacoplada con <strong>Vue.js + Pinia</strong>.
-            </li>
-            <li>
-              Exploración del stack MEVN (MongoDB, Express, Vue, Node) para ampliar conocimientos de
-              backend.
-            </li>
-            <li>
-              Implementación de estándares de
-              <strong>accesibilidad web</strong>: ARIA, semántica HTML, navegación por teclado y
-              contraste de color.
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <div class="section-title">Formación</div>
-          <div class="entry">
-            <div class="edu-row">
-              <div>
-                <div class="edu-title">CFGS Desarrollo de Aplicaciones Web</div>
-                <div class="edu-center">CIFP La Laboral · Gijón</div>
-              </div>
-              <span class="edu-date">2021 — 2023</span>
-            </div>
-          </div>
-          <div class="entry">
-            <div class="edu-row">
-              <div>
-                <div class="edu-title">Formación complementaria autónoma</div>
-                <div class="edu-center">
-                  Laravel · Vue.js · PHP avanzado · Tailwind 3/4 · DOM · MySQL
-                </div>
-              </div>
-              <span class="edu-date">2022 — hoy</span>
-            </div>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   </body>
 </html>
