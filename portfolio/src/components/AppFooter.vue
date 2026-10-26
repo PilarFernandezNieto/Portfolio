@@ -5,6 +5,7 @@
     <div
       class="max-w-5xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4 font-sans text-xs tracking-[0.08em] uppercase text-cream/75"
     >
+      <router-link :to="{ name: 'privacy' }">Política de Privacidad</router-link>
       <p>© 2026 Pilar Fernández Nieto</p>
       <div class="flex flex-wrap items-center gap-6">
         <!-- <a
