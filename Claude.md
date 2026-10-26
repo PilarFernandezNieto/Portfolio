@@ -4,6 +4,7 @@
 
 Portfolio personal de Pilar Fernández Nieto, desarrolladora full-stack con base en Gijón.
 Proyecto en desarrollo activo. Este archivo recoge todas las decisiones técnicas y de contenido tomadas hasta ahora para no repetirlas.
+Soy desarrolladora mid, no utilices programación que usaría un senior porque no lo soy.
 
 ---
 

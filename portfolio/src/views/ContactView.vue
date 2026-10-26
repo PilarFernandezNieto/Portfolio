@@ -8,16 +8,37 @@ const form = ref({ name: '', email: '', message: '' })
 const loading = ref(false)
 const success = ref(false)
 const error = ref(null)
+const privacyAccepted = ref(false)
+const errors = ref({})
+
+function clearError(field) {
+  if (errors.value[field]) errors.value = { ...errors.value, [field]: undefined }
+}
 
 async function handleSubmit() {
-  loading.value = true
   error.value = null
+  errors.value = {}
+
+  if (!privacyAccepted.value) {
+    errors.value = { privacy: 'Debes aceptar la política de privacidad para enviar el mensaje.' }
+    return
+  }
+
+  loading.value = true
   try {
     await api.post('/contact', form.value)
     success.value = true
     form.value = { name: '', email: '', message: '' }
+    privacyAccepted.value = false
   } catch (e) {
-    error.value = e.response?.data?.message || 'Ha ocurrido un error. Inténtalo de nuevo.'
+    const fieldErrors = e.response?.data?.errors
+    if (e.response?.status === 422 && fieldErrors) {
+      errors.value = Object.fromEntries(
+        Object.entries(fieldErrors).map(([field, messages]) => [field, messages[0]]),
+      )
+    } else {
+      error.value = e.response?.data?.message || 'Ha ocurrido un error. Inténtalo de nuevo.'
+    }
   } finally {
     loading.value = false
   }
@@ -97,8 +118,19 @@ async function handleSubmit() {
             required
             autocomplete="name"
             placeholder="Nombre"
+            :aria-invalid="!!errors.name"
+            :aria-describedby="errors.name ? 'name-error' : undefined"
             class="w-full border-0 border-b border-ink bg-transparent font-sans text-base text-ink py-2.5 outline-none placeholder:text-ink/40 focus:border-b-2"
+            @input="clearError('name')"
           />
+          <p
+            v-if="errors.name"
+            id="name-error"
+            role="alert"
+            class="font-sans text-sm text-red-500 mt-2"
+          >
+            {{ errors.name }}
+          </p>
         </div>
 
         <div class="mb-6.5">
@@ -110,8 +142,19 @@ async function handleSubmit() {
             required
             autocomplete="email"
             placeholder="correo@ejemplo.com"
+            :aria-invalid="!!errors.email"
+            :aria-describedby="errors.email ? 'email-error' : undefined"
             class="w-full border-0 border-b border-ink bg-transparent font-sans text-base text-ink py-2.5 outline-none placeholder:text-ink/40 focus:border-b-2"
+            @input="clearError('email')"
           />
+          <p
+            v-if="errors.email"
+            id="email-error"
+            role="alert"
+            class="font-sans text-sm text-red-500 mt-2"
+          >
+            {{ errors.email }}
+          </p>
         </div>
 
         <div class="mb-9">
@@ -122,8 +165,52 @@ async function handleSubmit() {
             rows="5"
             required
             placeholder="Cuéntame el motivo de tu contacto"
+            :aria-invalid="!!errors.message"
+            :aria-describedby="errors.message ? 'message-error' : undefined"
             class="w-full border-0 border-b border-ink bg-transparent font-sans text-base text-ink py-2.5 outline-none resize-y placeholder:text-ink/40 focus:border-b-2"
+            @input="clearError('message')"
           />
+          <p
+            v-if="errors.message"
+            id="message-error"
+            role="alert"
+            class="font-sans text-sm text-red-500 mt-2"
+          >
+            {{ errors.message }}
+          </p>
+        </div>
+
+        <div class="mb-9">
+          <div class="flex items-start gap-3">
+            <input
+              id="privacy"
+              v-model="privacyAccepted"
+              type="checkbox"
+              required
+              :aria-invalid="!!errors.privacy"
+              :aria-describedby="errors.privacy ? 'privacy-error' : undefined"
+              class="mt-1 h-4 w-4 shrink-0 accent-ink focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+              @change="clearError('privacy')"
+            />
+            <label for="privacy" class="font-sans text-sm leading-relaxed text-ink/85">
+              He leído y acepto la
+              <RouterLink
+                :to="{ name: 'privacy' }"
+                target="_blank"
+                class="underline font-semibold text-ink focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+              >
+                Política de Privacidad
+              </RouterLink>
+            </label>
+          </div>
+          <p
+            v-if="errors.privacy"
+            id="privacy-error"
+            role="alert"
+            class="font-sans text-sm text-red-500 mt-2"
+          >
+            {{ errors.privacy }}
+          </p>
         </div>
 
         <div v-if="error" role="alert" class="font-sans text-sm text-red-500 mb-6">
