@@ -7,10 +7,10 @@
       <h2 class="text-lg font-semibold mb-2">Responsable</h2>
       <p class="leading-relaxed">
         Pilar Fernández Nieto ·
-        <router-link
-          class="hover:text-slate-600 transition duration-150 ease-in"
+        <a
           href="mailto:pilarfnieto@gmail.com"
-          >pilarfnieto@gmail.com</router-link
+          class="hover:text-slate-600 transition duration-150 ease-in"
+          >pilarfnieto@gmail.com</a
         >
       </p>
     </section>
@@ -34,8 +34,8 @@
     <section class="mb-6">
       <h2 class="text-lg font-semibold mb-2">Conservación</h2>
       <p class="leading-relaxed">
-        Conservo tu mensaje solo el tiempo necesario para atender tu consulta y, como máximo, [12
-        meses] después del último contacto.
+        Conservo tu mensaje solo el tiempo necesario para atender tu consulta y, como máximo, 12
+        meses después del último contacto.
       </p>
     </section>
 
@@ -43,8 +43,7 @@
       <h2 class="text-lg font-semibold mb-2">Destinatarios</h2>
       <p class="leading-relaxed">
         No cedo tus datos a terceros. Este sitio está alojado en un servidor de OVHcloud, que actúa
-        como encargado del tratamiento y solo presta el servicio técnico de alojamiento. [Servidores
-        dentro de la Unión Europea, sin transferencias internacionales de datos.]
+        como encargado del tratamiento y solo presta el servicio técnico de alojamiento.
       </p>
     </section>
 
