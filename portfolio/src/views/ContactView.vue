@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import api from '@/services/api'
+import { useRecaptcha } from '@/composables/useRecaptcha'
 import FormLabel from '@/components/FormLabel.vue'
 import ButtonDark from '@/components/ButtonDark.vue'
 
@@ -10,6 +11,11 @@ const success = ref(false)
 const error = ref(null)
 const privacyAccepted = ref(false)
 const errors = ref({})
+const recaptcha = useRecaptcha()
+
+onMounted(() => {
+  recaptcha.load().catch(() => {})
+})
 
 function clearError(field) {
   if (errors.value[field]) errors.value = { ...errors.value, [field]: undefined }
@@ -26,16 +32,19 @@ async function handleSubmit() {
 
   loading.value = true
   try {
-    await api.post('/contact', form.value)
+    const recaptchaToken = await recaptcha.execute('contact')
+    await api.post('/contact', { ...form.value, recaptcha_token: recaptchaToken })
     success.value = true
     form.value = { name: '', email: '', message: '' }
     privacyAccepted.value = false
   } catch (e) {
     const fieldErrors = e.response?.data?.errors
     if (e.response?.status === 422 && fieldErrors) {
-      errors.value = Object.fromEntries(
+      const { recaptcha_token: recaptchaError, ...fieldMessages } = Object.fromEntries(
         Object.entries(fieldErrors).map(([field, messages]) => [field, messages[0]]),
       )
+      errors.value = fieldMessages
+      error.value = recaptchaError ?? null
     } else {
       error.value = e.response?.data?.message || 'Ha ocurrido un error. Inténtalo de nuevo.'
     }
