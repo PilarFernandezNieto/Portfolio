@@ -1,23 +1,31 @@
 <script setup>
-import { computed, onMounted } from 'vue'
-import { useAboutStore } from '@/stores/about'
-import AppSpinner from '@/components/AppSpinner.vue'
-import ButtonDark from '@/components/ButtonDark.vue'
-import DOMPurify from 'dompurify'
+import { computed, onMounted } from 'vue';
+import { useAboutStore } from '@/stores/about';
+import { usePageReady } from '@/composables/usePageReady';
+import AppSpinner from '@/components/AppSpinner.vue';
+import ButtonDark from '@/components/ButtonDark.vue';
+import DOMPurify from 'dompurify';
 
-const aboutStore = useAboutStore()
+const aboutStore = useAboutStore();
+const { setReady } = usePageReady();
+
+setReady(false);
 
 const imageUrl = computed(() =>
   aboutStore.about.image ? `${import.meta.env.VITE_STORAGE_URL}/${aboutStore.about.image}` : null,
-)
+);
 
 const sanitizedBio = computed(() =>
   aboutStore.about ? DOMPurify.sanitize(aboutStore.about.bio) : '',
-)
+);
 
-onMounted(() => {
-  aboutStore.fetchAbout()
-})
+onMounted(async () => {
+  try {
+    await aboutStore.fetchAbout();
+  } finally {
+    setReady(true);
+  }
+});
 </script>
 
 <template>

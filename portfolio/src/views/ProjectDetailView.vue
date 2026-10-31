@@ -1,37 +1,45 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useProjectsStore } from '@/stores/projects'
-import AppSpinner from '@/components/AppSpinner.vue'
-import ButtonDark from '@/components/ButtonDark.vue'
-import Galleria from 'primevue/galleria'
-import DOMPurify from 'dompurify'
+import { computed, onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useProjectsStore } from '@/stores/projects';
+import { usePageReady } from '@/composables/usePageReady';
+import AppSpinner from '@/components/AppSpinner.vue';
+import ButtonDark from '@/components/ButtonDark.vue';
+import Galleria from 'primevue/galleria';
+import DOMPurify from 'dompurify';
 
-const route = useRoute()
-const router = useRouter()
-const store = useProjectsStore()
+const route = useRoute();
+const router = useRouter();
+const store = useProjectsStore();
+const { setReady } = usePageReady();
+
+setReady(false);
 
 onMounted(async () => {
-  await store.fetchProject(route.params.id)
-  if (!store.project) {
-    router.replace({ name: 'not-found' })
+  try {
+    await store.fetchProject(route.params.id);
+    if (!store.project) {
+      router.replace({ name: 'not-found' });
+    }
+  } finally {
+    setReady(true);
   }
-})
+});
 
-const storageUrl = (path) => `${import.meta.env.VITE_STORAGE_URL}/${path}`
+const storageUrl = (path) => `${import.meta.env.VITE_STORAGE_URL}/${path}`;
 
 const sanitizedDescription = computed(() =>
   store.project ? DOMPurify.sanitize(store.project.description) : '',
-)
+);
 
-const hasGallery = computed(() => store.project?.images?.length > 0)
+const hasGallery = computed(() => store.project?.images?.length > 0);
 
-const galleriaVisible = ref(false)
-const galleriaIndex = ref(0)
+const galleriaVisible = ref(false);
+const galleriaIndex = ref(0);
 
 function openGalleria(index) {
-  galleriaIndex.value = index
-  galleriaVisible.value = true
+  galleriaIndex.value = index;
+  galleriaVisible.value = true;
 }
 
 const galleriaPt = {
@@ -44,7 +52,7 @@ const galleriaPt = {
     'border border-cream/40 rounded-full text-cream hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-2',
   thumbnails: { class: 'bg-ink border-t border-cream/20' },
   thumbnail: 'opacity-60 hover:opacity-100 data-[p-active=true]:opacity-100',
-}
+};
 </script>
 
 <template>

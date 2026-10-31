@@ -1,11 +1,13 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { usePageReady } from './composables/usePageReady.js'
 import NavBar from './components/NavBar.vue'
 import AppFooter from './components/AppFooter.vue'
 import ConfirmModal from './components/ConfirmModal.vue'
 
 const route = useRoute()
+const { pageReady } = usePageReady()
 const isAdmin = computed(() => route.path.startsWith('/admin'))
 </script>
 
@@ -31,7 +33,7 @@ const isAdmin = computed(() => route.path.startsWith('/admin'))
         </Transition>
       </RouterView>
     </main>
-    <AppFooter />
+    <AppFooter v-show="pageReady" />
   </div>
 </template>
 
