@@ -1,5 +1,5 @@
 <template>
-  <main class="max-w-5xl mx-auto pt-16 md:pt-24 pb-8 md:pb-12">
+  <main class="max-w-5xl mx-auto px-6 pt-16 md:pt-24 pb-8 md:pb-12">
     <h1 class="heading heading-1 mb-5">Política de privacidad</h1>
     <p class="text-sm text-gray-500 mb-8">Última actualización: 26 de octubre de 2026</p>
 
