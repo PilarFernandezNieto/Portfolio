@@ -62,7 +62,7 @@ async function handleSubmit() {
       <p class="font-sans text-[13px] font-bold tracking-widest uppercase text-muted mb-4.5">
         Contacto
       </p>
-      <h1 class="heading heading-1 mb-6 wrap-break-word">Gracias por visitar mi portfolio.</h1>
+      <h1 class="heading heading-1 mb-6 wrap-break-word">Te agradezco la visita.</h1>
       <p class="font-sans text-[17px] leading-relaxed text-ink/85 max-w-md mb-10">
         Si has llegado hasta aquí y crees que mi perfil puede encajar en tu equipo, puedes contactar
         conmigo a través del correo electrónico, LinkedIn o mediante el siguiente formulario.
