@@ -21,6 +21,9 @@ onMounted(async () => {
     if (!store.project) {
       router.replace({ name: 'not-found' });
     }
+    if (store.project) {
+      document.title = `${store.project.title} - Pilar Fernández Nieto`;
+    }
   } finally {
     setReady(true);
   }
@@ -109,7 +112,7 @@ const galleriaPt = {
                 class="w-fit"
                 :aria-label="`Ver proyecto ${store.project.title}`"
               >
-                Ver sitio
+                Ver proyecto
               </ButtonDark>
               <ButtonDark :to="{ name: 'projects' }">Volver</ButtonDark>
             </div>

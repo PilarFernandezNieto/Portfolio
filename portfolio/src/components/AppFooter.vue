@@ -18,6 +18,8 @@
           href="https://www.linkedin.com/in/pilar-fernandez-nieto-03639224b/"
           class="hover:text-cream"
           target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn de Pilar Fernández Nieto (se abre en una pestaña nueva)"
         >
           <svg
             class="h-8 w-8"
@@ -42,7 +44,11 @@
             />
           </svg>
         </a>
-        <a href="mailto:pilarfnieto@gmail.com" class="hover:text-cream">
+        <a
+          href="mailto:pilarfnieto@gmail.com"
+          class="hover:text-cream"
+          aria-label="Enviar un correo a Pilar Fernández Nieto"
+        >
           <svg
             class="h-12 w-12"
             viewBox="0 0 24 24"

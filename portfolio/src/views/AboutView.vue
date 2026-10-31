@@ -47,7 +47,7 @@ onMounted(async () => {
           <img
             v-if="imageUrl"
             :src="imageUrl"
-            alt=""
+            alt="Pilar Fernández Nieto, desarrolladora full-stack"
             class="w-full h-full object-cover grayscale-50"
           />
         </div>
